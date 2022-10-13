@@ -21,4 +21,5 @@ public class PlayerMovement : MonoBehaviour
         //Move the sprite around the map based on speed and input.
         Rb.MovePosition(Rb.position + Move * MovementSpeed * Time.fixedDeltaTime);
     }
+
 }
