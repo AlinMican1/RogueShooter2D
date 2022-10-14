@@ -24,8 +24,8 @@ public class WeaponSystem : MonoBehaviour
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash;
-    public TextMeshProUGUI text;
-    public TrailRenderer BulletTrail;
+    //public TextMeshProUGUI text;
+    //public TrailRenderer BulletTrail;
 
     // Start is called before the first frame update
     void Start()
@@ -38,9 +38,9 @@ public class WeaponSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+       // SetTextMagazine(bulletsLeft);
         myInput();
-        SetTextMagazine(bulletsLeft);
+       
     }
 
     void myInput()
@@ -115,10 +115,10 @@ public class WeaponSystem : MonoBehaviour
         readyToShoot = true;
     }
 
-    public void SetTextMagazine(int bulletsLeft)
+   /* public void SetTextMagazine(int bulletsLeft)
     {
         text.SetText(bulletsLeft + " / " + magazineSize);
-    }
+    }*/
 }
 
 
