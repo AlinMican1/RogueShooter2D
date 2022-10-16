@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5821466712396101408}
   - component: {fileID: 1309718562183507960}
   - component: {fileID: 5481500797295566676}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: pistol
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a84a2e96c839f1e4ead713cf20ce5c3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 1
+  damage: 5
   timeBetweenShooting: 0.1
   spread: 1
   range: 1
@@ -107,10 +107,13 @@ MonoBehaviour:
   magazineSize: 100
   bulletsPerTap: 1
   allowButtonHold: 0
-  shootpoint: {fileID: 8342892001308004140}
-  attackPoint: {fileID: 0}
+  shootpoint: {fileID: 2717028020148862275}
+  BulletPrefab: {fileID: 8170122553746750827, guid: dada8492c84bc874aaa1f96da8342fda, type: 3}
   muzzleFlash: {fileID: 0}
-  text: {fileID: 0}
+  MagazineText: {fileID: 6565782362835915439, guid: 65420cc20b7efec409cd8d7dfde99a03, type: 3}
+  IgnoreMask:
+    serializedVersion: 2
+    m_Bits: 3584
 --- !u!1 &8342892001308004140
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,7 +123,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2717028020148862275}
-  m_Layer: 5
+  m_Layer: 9
   m_Name: ShootPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}

@@ -13,37 +13,47 @@ public class WeaponSystem : MonoBehaviour
     int bulletsLeft, bulletsShot;
     bool shooting, readyToShoot, reloading, switchedWeapon;
     public bool allowButtonHold;
-    public GameObject shootpoint;
     
-
-
     [Header("Reference")]
-    public Transform attackPoint;
+    public Transform shootpoint;
     public RaycastHit rayHit;
-
+    public GameObject BulletPrefab;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash;
-    //public TextMeshProUGUI text;
-    //public TrailRenderer BulletTrail;
+    public TextMeshProUGUI MagazineText;
+
+    //Ignore Layer Weapon for RayCast, because bullets have a collider, and we want to ignore this collider, for the rayCast
+    [Space(10)]
+    [SerializeField] LayerMask IgnoreMask = 1 << 10 | 1 << 11;
 
     // Start is called before the first frame update
     void Start()
     {
+        
         bulletsLeft = magazineSize;
         readyToShoot = true;
+        
 
     }
 
     // Update is called once per frame
-    void Update()
+    private void Update()
     {
-       // SetTextMagazine(bulletsLeft);
+        
         myInput();
+
+        try
+        {
+            SetTextMagazine(bulletsLeft);
+        }
+        catch (System.NullReferenceException) { }
+        
        
+
     }
 
-    void myInput()
+    private void myInput()
     {
         //Check if we are able to shoot, if so call shoot function.
         //Check if we can reload.
@@ -83,23 +93,27 @@ public class WeaponSystem : MonoBehaviour
 
     private void Shoot()
     {
+        
         readyToShoot = false;
-        Debug.Log("shoot");
         
         // Creates a Ray from this object, moving forward
-        RaycastHit2D hit = Physics2D.Raycast(shootpoint.transform.position, transform.TransformDirection(Vector2.up), 100f);
-        Debug.DrawRay(transform.position, transform.TransformDirection(Vector2.up) * 100f, Color.red);
+        RaycastHit2D hit = Physics2D.Raycast(shootpoint.position, transform.TransformDirection(Vector2.right), 100f, ~IgnoreMask);
+        
 
-        //Test if i hit something
+        //Test if a collider is hit
         if (hit)
         {
             Debug.Log(hit.collider.name);
         }
 
         //TrailRenderer trail = Instantiate(BulletTrail, shootpoint.transform.position, transform.rotation);
-
+        Instantiate(BulletPrefab, shootpoint.position, shootpoint.rotation);
+        
+        
         bulletsLeft--;
         bulletsShot--;
+        
+
         Invoke("ResetShot", timeBetweenShooting);
 
         if (bulletsShot > 0 && bulletsLeft > 0)
@@ -107,18 +121,19 @@ public class WeaponSystem : MonoBehaviour
             Invoke("Shoot", timeBetweenShots);
         }
 
-    }
 
+    }
     private void ResetShot()
     {
 
         readyToShoot = true;
     }
 
-   /* public void SetTextMagazine(int bulletsLeft)
+    public void SetTextMagazine(int bulletsLeft)
     {
-        text.SetText(bulletsLeft + " / " + magazineSize);
-    }*/
+        
+        MagazineText.SetText( bulletsLeft + " / " + magazineSize);
+    }
 }
 
 

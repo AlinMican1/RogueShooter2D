@@ -1,0 +1,1 @@
+-Achieved performance by destroying game objects after some time
