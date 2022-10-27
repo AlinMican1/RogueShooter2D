@@ -11,11 +11,15 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player")]
     public float MovementSpeed = 5f;
     public Rigidbody2D Rb;
+    bool Invulnerable;
+    float DodgeCooldown = 1f;
+    float NextDodge = 0f;
    
     
     Vector2 Move;
     private void Start()
     {
+        //Invulnerable = false;
         //Find the script that is called PlayerLook on the attached Gameobject
         Player_Look_Script = GameObject.FindObjectOfType<PlayerLook>();
     }
@@ -26,7 +30,13 @@ public class PlayerMovement : MonoBehaviour
         Move.y = Input.GetAxisRaw("Vertical");
         //Constantly update player position
         GetPlayerPosition();
-       
+        
+        if (Input.GetKey(KeyCode.LeftShift))
+        {
+            
+            Dodge();
+            //NextDodge = Time.time + DodgeCooldown;
+        }
     }
 
     void FixedUpdate()
@@ -40,6 +50,15 @@ public class PlayerMovement : MonoBehaviour
     {
         return Rb.position;
     }
+
+    private void Dodge()
+    {
+        float DodgeSpeed = 10f;
+        Rb.position = Rb.position + Move * DodgeSpeed * Time.fixedDeltaTime;
+        
+    }
+
+    
    
    
 

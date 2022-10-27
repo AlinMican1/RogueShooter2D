@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2928380231840269463}
   - component: {fileID: 8848622549915324824}
-  - component: {fileID: 749211899574347144}
+  - component: {fileID: 1450424240961707941}
   m_Layer: 8
   m_Name: building
   m_TagString: Untagged
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 817959197869612780}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 5, y: 10, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -85,7 +85,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!61 &749211899574347144
+--- !u!61 &1450424240961707941
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

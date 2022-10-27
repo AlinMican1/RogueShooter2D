@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 951208017477467090}
   - component: {fileID: 6809443375408205758}
-  - component: {fileID: 827669914}
   - component: {fileID: 827669915}
   - component: {fileID: -8122937637032430262}
-  - component: {fileID: 9138239386644929716}
+  - component: {fileID: -2061449173385445815}
+  - component: {fileID: 5163229939289448353}
   m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
@@ -88,27 +88,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!50 &827669914
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7104764485235644554}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
-  m_AngularDrag: 0.05
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 0
-  m_SleepingMode: 1
-  m_CollisionDetection: 0
-  m_Constraints: 4
 --- !u!114 &827669915
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -122,7 +101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MovementSpeed: 2
-  Rb: {fileID: 827669914}
+  Rb: {fileID: 5163229939289448353}
 --- !u!114 &-8122937637032430262
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,9 +114,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b29a1658b702f244492c4d27a012f7d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cam: {fileID: 0}
   angle: 0
---- !u!61 &9138239386644929716
+--- !u!61 &-2061449173385445815
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -163,3 +141,24 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!50 &5163229939289448353
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7104764485235644554}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

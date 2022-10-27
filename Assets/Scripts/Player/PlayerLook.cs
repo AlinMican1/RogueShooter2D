@@ -8,7 +8,7 @@ public class PlayerLook : MonoBehaviour
     PlayerMovement Move_Player_Script;
 
     [Header("Variables")]
-    public Camera Cam;
+    Camera Cam;
 
     [SerializeField] float angle;
     Vector2 MousePosition;
@@ -30,7 +30,7 @@ public class PlayerLook : MonoBehaviour
     private void FixedUpdate()
     {
         //Get the Direction the player is facing
-        Vector2 Direction = MousePosition - Move_Player_Script.GetPlayerPosition();
+        Vector3 Direction = MousePosition - Move_Player_Script.GetPlayerPosition();
         //Calculate the angle that between starting vector and directional vector
         angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
     
@@ -40,4 +40,5 @@ public class PlayerLook : MonoBehaviour
     {
         return angle;
     }
+
 }
