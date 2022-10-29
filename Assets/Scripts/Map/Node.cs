@@ -13,22 +13,19 @@ public class Node
 
     public int gCost;
     public int hCost;
-
-    public Node(bool allowedToWalk, Vector3 worldPosition)
+    public Node parent;
+    public Node(bool allowedToWalk, Vector3 worldPosition, int gridX, int gridY)
     {
         
         this.allowedToWalk = allowedToWalk;
         this.worldPosition = worldPosition;
-        //this.gridX = gridX;
-        //this.gridY = gridY;
+        this.gridX = gridX;
+        this.gridY = gridY;
     }
 
-    public int fCost
+    public int fCost()
     {
-        get
-        {
-            return gCost + hCost;
-        }
-        
+        return gCost + hCost;
+  
     }
 }

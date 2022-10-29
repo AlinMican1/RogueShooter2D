@@ -14,29 +14,31 @@ public class Grid : MonoBehaviour
     int gridSizeX, gridSizeY;
     PlayerMovement Player_Movement_Script;
 
-    public void Start()
+    void Awake()
     {
         Player_Movement_Script = GameObject.FindObjectOfType<PlayerMovement>();
         gridSizeX = (int)(gridSize.x / (nodeSize * 2));
         gridSizeY = (int)(gridSize.x / (nodeSize * 2));
         GenerateMapGrid();
     }
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y, 3));
-        foreach (Node n in grid)
-        {
-            Node playerNode = getPlayerPosition(Player_Movement_Script.GetPlayerPosition());
-            
-            Gizmos.color = (n.allowedToWalk) ? Color.white : Color.red;
-            if (playerNode == n)
-            {
-                Gizmos.color = Color.cyan;
-            }
 
-            Gizmos.DrawCube(n.worldPosition, Vector3.one * ((nodeSize * 2) - 0.1f));
-        }
-    }
+    /* private void OnDrawGizmos()
+     {
+         Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y, 3));
+         foreach (Node n in grid)
+         {
+             Node playerNode = GetNodePosition(Player_Movement_Script.GetPlayerPosition());
+
+             Gizmos.color = (n.allowedToWalk) ? Color.white : Color.red;
+             if (playerNode == n)
+             {
+                 Gizmos.color = Color.cyan;
+             }
+
+
+             Gizmos.DrawCube(n.worldPosition, Vector3.one * ((nodeSize * 2) - 0.1f));
+         }
+     }*/
     public Vector3 GetbottomLeft()
     {
         Vector3 bottomLeft = transform.position - Vector3.right * gridSize.x / 2 - Vector3.up * gridSize.y / 2;
@@ -75,21 +77,63 @@ public class Grid : MonoBehaviour
             for (int x = 0; x < gridSizeX; x++)
             {
 
-                grid[x, y] = new Node(Walkable(x, y), Position(x, y));
+                grid[x, y] = new Node(Walkable(x, y), Position(x, y),x,y);
             }
         }
     }
-    public Node getPlayerPosition(Vector3 position)
+    public Node GetNodePosition(Vector3 position)
     {
+        //Get the axis percent, along the grid.
         float percentX = (position.x + gridSize.x / 2) / gridSize.x;
         float percentY = (position.y + gridSize.y / 2) / gridSize.y;
-        //avoiding errros in case the player is outside the grid
-        percentX = Mathf.Clamp01(percentX);
-        percentY = Mathf.Clamp01(percentY);
-
-        int x = (int)((gridSizeX - 1) * percentX);
-        int y = (int)((gridSizeY - 1) * percentY);
+       
+        //avoiding errros in case the object is out of bounds.
+        if(percentX < 0)
+        {
+            percentX = 0;
+        }
+        else if(percentX > 1){
+            percentX = 1;
+        }
+        else if(percentY < 0)
+        {
+            percentY = 0;
+        }
+        else if (percentY > 1)
+        {
+            percentY = 1;
+        }
+        
+        int x = (int)((gridSizeX) * percentX);
+        int y = (int)((gridSizeY) * percentY);
+        
         return grid[x, y];
+    }
+    
+    public List<Node> FindNeighbours(Node neighbour)
+    {
+        int x_axis;
+        int y_axis;
+        List<Node> neighbours = new List<Node>();
+        
+        for (int x = -1; x<= 1; x++)
+        {
+            for (int y = -1; y <= 1; y++)
+            {
+                if(x==0 && y == 0)
+                {
+                    continue;
+                }
+                x_axis = neighbour.gridX + x;
+                y_axis = neighbour.gridY + y;
+                
+                if(x_axis >= 0 && x_axis < gridSizeX && y_axis >= 0 && y_axis < gridSizeY)
+                {
+                    neighbours.Add(grid[x_axis, y_axis]);
+                }
+            }
+        }
+        return neighbours;
     }
 }
 

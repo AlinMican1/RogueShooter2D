@@ -539,6 +539,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee05402f1718ac34daf28af650be277a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  notAllowedToWalk:
+    serializedVersion: 2
+    m_Bits: 256
+  gridSize: {x: 100, y: 100}
+  nodeSize: 1
 --- !u!4 &988890371
 Transform:
   m_ObjectHideFlags: 0
@@ -566,6 +571,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3287d95eb4225e443a0ab51fb928c0c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  seeker: {fileID: 1218872119}
+  target: {fileID: 335118807}
 --- !u!1 &1064610947
 GameObject:
   m_ObjectHideFlags: 0
@@ -826,7 +833,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2928380231840269463, guid: c01b958df732bc340a828c4b7ce1fdb2, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -10.94
+      value: -11.51
       objectReference: {fileID: 0}
     - target: {fileID: 2928380231840269463, guid: c01b958df732bc340a828c4b7ce1fdb2, type: 3}
       propertyPath: m_LocalPosition.y

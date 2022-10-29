@@ -1,58 +1,131 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class PathFinding : MonoBehaviour
 {
-    /*Grid grid;
-    private void Awake()
-    {
-        grid = GetComponent<Grid>();
-    }
-    private void FindingPath(Vector3 startPosition, Vector3 targetPosition)
-    {
-        Nodes startNode = grid.NodefromWorldPoint(startPosition);
-        Nodes targetNode = grid.NodefromWorldPoint(targetPosition);
+    MoveToTarget moveToTarget_Script;
+    Grid grid_Script;
+    //public Transform seeker, target;
 
-        List<Nodes> openSet = new List<Nodes>();
-        HashSet<Nodes> closedSet = new HashSet<Nodes>();
-        openSet.Add(startNode);
-        //stopped at 16:47
-        while (openSet.Count > 0)
+    public void Awake()
+    {
+        grid_Script = GetComponent<Grid>();
+        moveToTarget_Script = GetComponent<MoveToTarget>();
+    }
+    public void FindStartPath(Vector3 startPosition, Vector3 endPosition)
+    {
+        StartCoroutine(GetPath(startPosition, endPosition));
+    }
+    public IEnumerator GetPath(Vector3 startPosition, Vector3 endPosition)
+    {
+        Vector3[] points = new Vector3[0];
+        bool pathSucess = false;
+
+        Node startNode = grid_Script.GetNodePosition(startPosition);
+        Node endNode = grid_Script.GetNodePosition(endPosition);
+        
+        if(startNode.allowedToWalk && endNode.allowedToWalk)
         {
-            Nodes currentNode = openSet[0];
-            for (int i = 1; i < openSet.Count; i++)
+            List<Node> openList = new List<Node>();
+            HashSet<Node> closedList = new HashSet<Node>();
+            openList.Add(startNode);
+
+            while (openList.Count > 0)
             {
-                if ( openSet[i].fCost < currentNode.fCost || openSet[i].fCost == currentNode.fCost
-                && openSet[i].hCost < currentNode.hCost)
+                Node currentNode = openList[0];
+                for (int i = 1; i < openList.Count; i++)
                 {
-                    currentNode = openSet[i];
+                    if (openList[i].fCost() < currentNode.fCost() || openList[i].fCost() == currentNode.fCost() && openList[i].hCost < currentNode.hCost)
+                    {
+                        currentNode = openList[i];
+                    }
                 }
-            }
-            openSet.Remove(currentNode);
-            closedSet.Add(currentNode);
-            if(currentNode == targetNode)
-            {
-                return;
-            }
-            foreach (Nodes neighbour in grid.GetNeighbours(currentNode))
-            {
-                if (!neighbour.allowedToWalk || closedSet.Contains(neighbour))
+                openList.Remove(currentNode);
+                closedList.Add(currentNode);
+
+                if (currentNode == endNode)
                 {
-                    continue;
+                    pathSucess = true;
+
+                    break;
+                }
+                foreach (Node neighbour in grid_Script.FindNeighbours(currentNode))
+                {
+                    if (!neighbour.allowedToWalk || closedList.Contains(neighbour))
+                    {
+                        continue;
+                    }
+                    int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
+                    if (newMovementCostToNeighbour < neighbour.gCost || !openList.Contains(neighbour))
+                    {
+                        neighbour.gCost = newMovementCostToNeighbour;
+                        neighbour.hCost = GetDistance(neighbour, endNode);
+                        neighbour.parent = currentNode;
+
+                        if (!openList.Contains(neighbour))
+                        {
+                            openList.Add(neighbour);
+                        }
+                    }
                 }
             }
         }
+       
+        yield return null;
+        if (pathSucess)
+        {
+            points = RetracePath(startNode, endNode);
+        }
+        moveToTarget_Script.FinishedPath(points, pathSucess);
     }
 
-    int GetDistance(Nodes nodeA , Nodes nodeB)
+    public Vector3[] RetracePath(Node startNode, Node endNode)
     {
-        int dstX = (int)(nodeA.gridX - nodeB.gridX);
-        int dstY = (int)(nodeA.gridY - nodeB.gridY);
-        if(dstX > dstY)
+        List<Node> path = new List<Node>();
+        Node currentNode = endNode;
+        while(currentNode != startNode)
         {
-            return 14 * dstY + 10 * (dstX - dstY);
+            path.Add(currentNode);
+            currentNode = currentNode.parent;
         }
-        return 14 * dstX + 10 * (dstY - dstX);
-    }*/
+        Vector3[] points = SimplifyPath(path);
+        Array.Reverse(points);
+        return points;
+
+
+    }
+
+    Vector3[] SimplifyPath(List<Node> path)
+    {
+        List<Vector3> points = new List<Vector3>();
+        Vector2 directionOld = Vector2.zero;
+        for (int i = 1; i< path.Count; i++)
+        {
+            Vector2 directionNew = new Vector2(path[i - 1].gridX - path[i].gridX, path[i - 1].gridY - path[i].gridY);
+            if(directionNew != directionOld)
+            {
+                points.Add(path[i].worldPosition);
+
+            }
+            directionOld = directionNew;
+
+        }
+        return points.ToArray();
+    }
+
+    int GetDistance(Node NodeA, Node NodeB)
+    {
+        int distX = Mathf.Abs(NodeA.gridX - NodeB.gridX);
+        int distY = Mathf.Abs(NodeA.gridY - NodeB.gridY);
+        if(distX > distY)
+        {
+            return 14 * distY + 10 * (distX - distY);
+        }
+        return 14 * distX + 10 * (distY - distX);
+    }
+
+
+   
 }

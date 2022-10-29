@@ -8,3 +8,5 @@
        -Use a 2D array to implement the grid
        -Use a mask layer to find all the walkable and non-walkable nodes.
        -Testing I will be debug.logging to see the grid take shape.
+
+-Second Create A* algorithm
