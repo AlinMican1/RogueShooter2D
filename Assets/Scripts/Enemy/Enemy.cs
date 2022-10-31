@@ -9,7 +9,14 @@ public class Enemy : MonoBehaviour
     Vector3[] path;
     int targetIndex;
 
-   
+    private void Start()
+    {
+
+        MoveToTarget.RequestPath(transform.position, player.position, OnPathFound);
+
+
+    }
+
     private void Update()
     {
        
@@ -38,8 +45,8 @@ public class Enemy : MonoBehaviour
                 targetIndex++;
                 if(targetIndex >= path.Length)
                 {
-                    //targetIndex = 0;
-                    //path = new Vector3[0]; 
+                    targetIndex = 0;
+                    path = new Vector3[0]; 
                     yield break;
                 }
                 currentPoint = path[targetIndex];

@@ -126,6 +126,32 @@ public class PathFinding : MonoBehaviour
         return 14 * distX + 10 * (distY - distX);
     }
 
+    /*private List<Node> openList;
+    private List<Node> closedList;
+    private Grid grid_Script;
+    public void Awake()
+    {
+        grid_Script = GetComponent<Grid>();
+    }
 
-   
+    private List<Node> GetPath(Vector3 startPosition, Vector3 endPosition)
+    {
+        Node startNode = grid_Script.GetNodePosition(startPosition);
+        Node endNode = grid_Script.GetNodePosition(endPosition);
+
+        openList = new List<Node>();
+        closedList = new List<Node>();
+        openList.Add(startNode);
+
+        for (int x = 0; x < grid_Script.GetWidth(); x++)
+        {
+           for (int y = 0; y < grid_Script.GetHeight(); y++)
+           {
+                N
+           }
+        }
+    }*/
+
+
+
 }

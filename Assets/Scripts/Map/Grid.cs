@@ -22,7 +22,7 @@ public class Grid : MonoBehaviour
         GenerateMapGrid();
     }
 
-    /* private void OnDrawGizmos()
+     private void OnDrawGizmos()
      {
          Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y, 3));
          foreach (Node n in grid)
@@ -35,10 +35,9 @@ public class Grid : MonoBehaviour
                  Gizmos.color = Color.cyan;
              }
 
-
              Gizmos.DrawCube(n.worldPosition, Vector3.one * ((nodeSize * 2) - 0.1f));
          }
-     }*/
+     }
     public Vector3 GetbottomLeft()
     {
         Vector3 bottomLeft = transform.position - Vector3.right * gridSize.x / 2 - Vector3.up * gridSize.y / 2;
@@ -134,6 +133,16 @@ public class Grid : MonoBehaviour
             }
         }
         return neighbours;
+    }
+
+    public int GetWidth()
+    {
+        return (int)(gridSize.x);
+    }
+
+    public int GetHeight()
+    {
+        return (int)(gridSize.y);
     }
 }
 
