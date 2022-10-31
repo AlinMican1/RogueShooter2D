@@ -17,6 +17,8 @@ public class PlayerMovement : MonoBehaviour
    
     
     Vector2 Move;
+
+    
     private void Start()
     {
         //Invulnerable = false;
@@ -57,8 +59,8 @@ public class PlayerMovement : MonoBehaviour
         Rb.position = Rb.position + Move * DodgeSpeed * Time.fixedDeltaTime;
         
     }
-
-    
+   
+   
    
    
 

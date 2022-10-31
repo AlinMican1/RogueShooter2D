@@ -10,3 +10,11 @@
        -Testing I will be debug.logging to see the grid take shape.
 
 -Second Create A* algorithm
+
+
+-Working on Health System week 31 oct
+   -Able to take damage
+   -Able to increase health
+   -Bar health slider included
+
+-Working on XP System week 31 oct
