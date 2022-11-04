@@ -18,3 +18,5 @@
    -Bar health slider included
 
 -Working on XP System week 31 oct
+    -Learn about time scale in unity, being able to stop time and all functions (pausing the game) when activating time.time = 0 freezing everything that uses time scale.
+    -Learnning about scriptable items

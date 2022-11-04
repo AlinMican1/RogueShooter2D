@@ -12,11 +12,16 @@ public class PlayerXP : MonoBehaviour
 
     bool levelUp = false;
     public XPBar xpbar;
+    LevelUpMenu levelUpMenu_Script;
+    LevelUpMenu enableButton_script;
+    
     // Start is called before the first frame update
 
     private void Awake()
     {
         pause = GameObject.FindObjectOfType<PauseController>();
+        levelUpMenu_Script = GameObject.FindObjectOfType<LevelUpMenu>();
+        enableButton_script = GameObject.FindObjectOfType<LevelUpMenu>();
     }
     void Start()
     {
@@ -31,6 +36,7 @@ public class PlayerXP : MonoBehaviour
         {
             IncreaseXp(5);
         }
+        print(LevelUp());
         
     }
 
@@ -39,14 +45,17 @@ public class PlayerXP : MonoBehaviour
         if(currentXP == maxXP)
         {
             levelUp = true;
-            displayMenu(levelUp);
             currentXP = 0;
+            //Pause Game Once LevelUp
+            pause.PauseGame();
+            
         }
         else if(currentXP + Xp >= maxXP)
         {
             levelUp = true;
-            displayMenu(levelUp);
             currentXP = 0;
+            //Pause Game Once LevelUp
+            pause.PauseGame();
         }
         else
         {
@@ -56,18 +65,31 @@ public class PlayerXP : MonoBehaviour
         xpbar.SetXP(currentXP);
     }
 
-    public void displayMenu(bool leveledUp)
+    /*public void displayMenu(bool leveledUp)
     {
         if (leveledUp)
         {
             pause.PauseGame();
         }
 
-    }
+    }*/
 
+    //Check LevelUp
+    public bool LevelUp()
+    {
+
+       
+        return levelUp;
+        
+    }
     //Check if we pick up experience;
     public bool pickUpXp()
     {
         return true; 
+    }
+
+    public void SetLevelUpToFalse()
+    {
+        levelUp = false;
     }
 }
