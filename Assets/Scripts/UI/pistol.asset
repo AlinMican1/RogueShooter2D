@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17af47701409fa4428faa6e329c5126b, type: 3}
   m_Name: pistol
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  artwork: {fileID: 0}
+  name: Glock
+  description: 1 per Tap
+  artwork: {fileID: 21300000, guid: a1f8e5f8d5bcf6b43ab84115cb6c5a38, type: 3}

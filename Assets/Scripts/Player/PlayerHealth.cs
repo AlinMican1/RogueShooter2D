@@ -70,4 +70,9 @@ public class PlayerHealth : MonoBehaviour
         }
         healthbar.SetHealth(currentHealth);
     }
+
+    public int GetHealth()
+    {
+        return currentHealth;
+    }
 }
