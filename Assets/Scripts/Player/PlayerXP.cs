@@ -65,20 +65,10 @@ public class PlayerXP : MonoBehaviour
         xpbar.SetXP(currentXP);
     }
 
-    /*public void displayMenu(bool leveledUp)
-    {
-        if (leveledUp)
-        {
-            pause.PauseGame();
-        }
-
-    }*/
-
     //Check LevelUp
     public bool LevelUp()
     {
-
-       
+ 
         return levelUp;
         
     }

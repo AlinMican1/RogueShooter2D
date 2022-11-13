@@ -59,9 +59,9 @@ public class PlayerMovement : MonoBehaviour
         Rb.position = Rb.position + Move * DodgeSpeed * Time.fixedDeltaTime;
         
     }
-   
-   
-   
-   
+
+
+
+
 
 }

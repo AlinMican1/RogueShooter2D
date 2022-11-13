@@ -7,6 +7,7 @@ public class PlayerHealth : MonoBehaviour
     [Header("Player variables")]
     public int maxHealth = 100;
     public int currentHealth;
+    bool invulnerable = false;
     
     [Header("Scripts")]
     public HealthBar healthbar;
@@ -37,9 +38,19 @@ public class PlayerHealth : MonoBehaviour
     //take damage from current health 
     public void TakeDamage(int damage)
     {
-        currentHealth -= damage;
-        healthbar.SetHealth(currentHealth);
+        if(invulnerable == false)
+        {
+            currentHealth -= damage;
+            healthbar.SetHealth(currentHealth);
+            StartCoroutine(DamageTaken());
+        }
+    }
 
+    IEnumerator DamageTaken()
+    {
+        invulnerable = true;
+        yield return new WaitForSeconds(0.5f);
+        invulnerable = false;
     }
     //Check if player Health is less/equal to 0, return true.
     public bool PlayerDied()
