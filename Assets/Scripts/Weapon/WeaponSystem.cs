@@ -18,6 +18,7 @@ public class WeaponSystem : MonoBehaviour
     public Transform shootpoint;
     public RaycastHit rayHit;
     public GameObject BulletPrefab;
+    
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash;
@@ -95,7 +96,13 @@ public class WeaponSystem : MonoBehaviour
     {
         
         readyToShoot = false;
+        //Spread
+        float x = Random.Range(-spread, spread);
+        float y = Random.Range(-spread, spread);
+
+        //Calculate direction with spread
         
+
         // Creates a Ray from this object, moving forward
         RaycastHit2D hit = Physics2D.Raycast(shootpoint.position, transform.TransformDirection(Vector2.right), 100f, ~IgnoreMask);
         
@@ -106,7 +113,7 @@ public class WeaponSystem : MonoBehaviour
             Debug.Log(hit.collider.name);
         }
 
-        //TrailRenderer trail = Instantiate(BulletTrail, shootpoint.transform.position, transform.rotation);
+       
         Instantiate(BulletPrefab, shootpoint.position, shootpoint.rotation);
         
         

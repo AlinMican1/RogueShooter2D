@@ -36,7 +36,7 @@ public class PlayerXP : MonoBehaviour
         {
             IncreaseXp(5);
         }
-        print(LevelUp());
+        
         
     }
 

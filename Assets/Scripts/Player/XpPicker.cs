@@ -17,7 +17,6 @@ public class XpPicker : MonoBehaviour
             
             if(other.transform.name == "1-Gem(Clone)")
             {
-                print("hi");
                 playerXP_script.IncreaseXp(1);
             }
             if (other.transform.name == "2-Gem(Clone)")

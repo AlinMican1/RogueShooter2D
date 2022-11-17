@@ -21,7 +21,16 @@ public class Bullet : MonoBehaviour
     {
         if (collision)
         {
-            Destroy(gameObject);
+            //Don't collide with XP
+            if (collision.gameObject.tag == "XP")
+            {
+                Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+            
         }
         //get the collision with Create_Enemy script
         if(collision.gameObject.TryGetComponent<Create_Enemy>(out Create_Enemy enemyComponent))
