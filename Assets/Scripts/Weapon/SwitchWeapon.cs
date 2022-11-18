@@ -7,6 +7,7 @@ public class SwitchWeapon : MonoBehaviour
     LevelUpMenu levelUpMenu_script;
     
     public int currentWeapon = 0;
+    string WeaponName;
 
     
     // Start is called before the first frame update
@@ -18,7 +19,7 @@ public class SwitchWeapon : MonoBehaviour
         {
             this.transform.GetChild(i).gameObject.SetActive(false);
         }
-        
+        WeaponName = this.transform.GetChild(0).name;
 
     }
 
@@ -45,11 +46,17 @@ public class SwitchWeapon : MonoBehaviour
             if (i == index)
             {
                 this.transform.GetChild(i).gameObject.SetActive(true);
+                WeaponName = this.transform.GetChild(i).name;
             }
             else
             {
                 this.transform.GetChild(i).gameObject.SetActive(false);
             }
         }
+    }
+
+    public string GetWeaponName()
+    {
+        return WeaponName;
     }
 }

@@ -18,12 +18,12 @@ public class RecoilSystem : MonoBehaviour
         Vector3 Mousepos = Input.mousePosition;
         Mousepos.z = Camera.main.nearClipPlane;
         worldPosition = Camera.main.ScreenToWorldPoint(Mousepos);
-        print(transform.position);
+       
         float dist = Vector3.Distance(worldPosition, transform.position);
        
         if (dist > 5f)
         {
-            print("hallo");
+           
         }
     }
 }
