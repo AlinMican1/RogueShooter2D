@@ -19,12 +19,14 @@ public class WeaponSystem : MonoBehaviour
     public Transform shootpoint;
     public RaycastHit rayHit;
     public GameObject BulletPrefab;
-    
+    RecoilSystem recoilSystem_script;
+    SwitchWeapon switchWeapon_script;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash;
     public TextMeshProUGUI MagazineText;
     [SerializeField] ShakeCamera ShakeCamera_Script;
+
 
 
     public float maxRecoil = 10f;
@@ -40,9 +42,12 @@ public class WeaponSystem : MonoBehaviour
     void Start()
     {
         ShakeCamera_Script = GameObject.FindObjectOfType<ShakeCamera>();
+        switchWeapon_script = GameObject.FindObjectOfType<SwitchWeapon>();
+        recoilSystem_script = GameObject.FindObjectOfType<RecoilSystem>();
         bulletsLeft = magazineSize;
         readyToShoot = true;
         time_elapsed = 0f;
+       
     }
    
 
@@ -51,7 +56,7 @@ public class WeaponSystem : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-        print(time_elapsed);
+       
         myInput();
 
         try
@@ -95,8 +100,8 @@ public class WeaponSystem : MonoBehaviour
         //Reset recoil based on holding down button or not
         if(readyToShoot && !shooting && !reloading && bulletsLeft > 0 && allowButtonHold)
         {
-            float recoilIncrement = (float)(maxRecoil * 0.1);
-            currentRecoil = Mathf.Clamp((float)(currentRecoil - recoilIncrement), 0.0f, maxRecoil);
+            float recoilIncrement = (float)(recoilSystem_script.distance * 0.1);
+            currentRecoil = Mathf.Clamp((float)(currentRecoil - recoilIncrement), 0.0f, recoilSystem_script.distance);
         }
         if (readyToShoot && !shooting && !reloading && bulletsLeft > 0 && !allowButtonHold)
         {
@@ -109,8 +114,8 @@ public class WeaponSystem : MonoBehaviour
     private IEnumerator ResetRecoil()
     {
         yield return new WaitForSeconds(0.8f);
-        float recoilIncrement = (float)(maxRecoil * 0.1);
-        currentRecoil = Mathf.Clamp((float)(currentRecoil - recoilIncrement), 0.0f, maxRecoil);
+        float recoilIncrement = (float)(recoilSystem_script.distance * 0.1);
+        currentRecoil = Mathf.Clamp((float)(currentRecoil - recoilIncrement), 0.0f, recoilSystem_script.distance);
     }
     private void Reload()
     {
@@ -134,13 +139,23 @@ public class WeaponSystem : MonoBehaviour
     {
         
         AddRecoil();
-        //StartCoroutine(ShakeCamera_Script.Shake(1f, 1f));
+        
+
+        //Camera Shake Based on the weapon.
+        if(switchWeapon_script.GetWeaponName() == "pistol")
+        {
+            ShakeCamera_Script.Shake(0.1f, 0.1f);
+        }
+        if (switchWeapon_script.GetWeaponName() == "Ak")
+        {
+            ShakeCamera_Script.Shake(0.05f, 0.1f);
+        }
         readyToShoot = false;
         
         
         //Recoil
-        float recoilIncrement = (float)(maxRecoil * 0.1);
-        currentRecoil = Mathf.Clamp((float)(currentRecoil + recoilIncrement), 0.0f, maxRecoil);
+        float recoilIncrement = (float)(recoilSystem_script.distance * 0.1);
+        currentRecoil = Mathf.Clamp((float)(currentRecoil + recoilIncrement), 0.0f, recoilSystem_script.distance);
 
         //Calculate direction with spread
         
@@ -153,6 +168,7 @@ public class WeaponSystem : MonoBehaviour
         if (hit)
         {
             Debug.Log(hit.collider.name);
+            
         }
 
        

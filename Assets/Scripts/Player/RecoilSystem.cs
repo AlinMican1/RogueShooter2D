@@ -6,6 +6,7 @@ public class RecoilSystem : MonoBehaviour
 {
 
     Vector3 worldPosition;
+    public float distance = 0;
     void Start()
     {
         
@@ -19,11 +20,12 @@ public class RecoilSystem : MonoBehaviour
         Mousepos.z = Camera.main.nearClipPlane;
         worldPosition = Camera.main.ScreenToWorldPoint(Mousepos);
        
-        float dist = Vector3.Distance(worldPosition, transform.position);
-       
-        if (dist > 5f)
-        {
-           
-        }
+        distance = Vector3.Distance(worldPosition, transform.position);
+
+        
+    }
+    public float GetDistance()
+    {
+        return distance;
     }
 }

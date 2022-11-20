@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class ShakeCamera : MonoBehaviour
 {
-    public Transform camera;
-    Vector3 startPosition;
-    float initialDuration;
     /*public IEnumerator Shake(float shakeTime, float shakeDistance)
     {
         float time_elapsed = 0f;
@@ -26,7 +23,7 @@ public class ShakeCamera : MonoBehaviour
 
         transform.localPosition = Vector2.zero;
         
-    }*/
+    }
 
     private void Start()
     {
@@ -48,13 +45,56 @@ public class ShakeCamera : MonoBehaviour
             camera.localPosition = startPosition;
         }
         startPosition = camera.localPosition;
+    }*/
+
+    public Camera MainCamera;
+    float shakeAmount = 0;
+
+    private void Awake()
+    {
+        if(MainCamera == null)
+        {
+            MainCamera = Camera.main;
+        }
+    }
+
+    public void Shake(float magnitude, float shakeTime )
+    {
+        shakeAmount = magnitude;
+        //Control how fast the camera will shake. 
+        InvokeRepeating("StartShake", 0, 0.01f);
+        Invoke("StopShake", shakeTime);
+
+    }
+    private void StartShake()
+    {
+        if(shakeAmount > 0)
+        {
+            Vector3 cameraPosition = MainCamera.transform.position;
+            //A formula for shaking camera on the X axis
+            float shakeX = Random.value * shakeAmount * 2 - shakeAmount;
+            float shakeY = Random.value * shakeAmount * 2 - shakeAmount;
+            cameraPosition.x += shakeX;
+            cameraPosition.y += shakeY;
+
+            //transform main camera position to the new camera position.
+            MainCamera.transform.position = cameraPosition;
+        }
+    }
+
+    private void StopShake()
+    {
+        //Cancel Camera Shake
+        CancelInvoke("StartShake");
+        MainCamera.transform.localPosition = Vector3.zero;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G))
+        if (Input.GetKeyDown(KeyCode.T))
         {
-            Shake(1,1,1);
+            Shake(0.1f, 0.2f);
         }
     }
+
 }
