@@ -56,7 +56,8 @@ public class WeaponSystem : MonoBehaviour
     // Update is called once per frame
     private void Update()
     {
-       
+
+        
         myInput();
 
         try
@@ -137,7 +138,7 @@ public class WeaponSystem : MonoBehaviour
     }
     private void Shoot()
     {
-        
+        //muzzleFlash.Play();
         AddRecoil();
         
 
@@ -149,6 +150,10 @@ public class WeaponSystem : MonoBehaviour
         if (switchWeapon_script.GetWeaponName() == "Ak")
         {
             ShakeCamera_Script.Shake(0.05f, 0.1f);
+        }
+        if (switchWeapon_script.GetWeaponName() == "Thompson")
+        {
+            ShakeCamera_Script.Shake(0.02f, 0.1f);
         }
         readyToShoot = false;
         
