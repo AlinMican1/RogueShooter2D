@@ -1,0 +1,22 @@
+-Achieved performance by destroying game objects after some time
+
+
+
+-Working on Pathfinding Algorithm 17th - 30th oct
+- First Create a Grid system where we can get map out the whole map, also find all the non-walkable nodes.
+       -To achieve make a gameobject and make a class Grid and set the gameobject at coordinate (0,0). 
+       -Use a 2D array to implement the grid
+       -Use a mask layer to find all the walkable and non-walkable nodes.
+       -Testing I will be debug.logging to see the grid take shape.
+
+-Second Create A* algorithm
+
+
+-Working on Health System week 31 oct
+   -Able to take damage
+   -Able to increase health
+   -Bar health slider included
+
+-Working on XP System week 31 oct
+    -Learn about time scale in unity, being able to stop time and all functions (pausing the game) when activating time.time = 0 freezing everything that uses time scale.
+    -Learnning about scriptable items
