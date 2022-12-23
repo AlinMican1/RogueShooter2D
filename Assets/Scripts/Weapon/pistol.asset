@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Glock
   description: 1 per Tap
-  artwork: {fileID: 21300000, guid: a1f8e5f8d5bcf6b43ab84115cb6c5a38, type: 3}
+  artwork: {fileID: 21300000, guid: 478891031bc2d4347bea1395fb9ceb70, type: 3}

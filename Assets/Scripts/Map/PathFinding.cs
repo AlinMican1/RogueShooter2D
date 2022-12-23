@@ -7,10 +7,10 @@ public class PathFinding : MonoBehaviour
 {
     MoveToTarget moveToTarget_Script;
     Grid grid_Script;
-    //public Transform seeker, target;
-
+    
     public void Awake()
     {
+        //Get the necessary scripts.
         grid_Script = GetComponent<Grid>();
         moveToTarget_Script = GetComponent<MoveToTarget>();
     }
@@ -18,22 +18,26 @@ public class PathFinding : MonoBehaviour
     {
         StartCoroutine(GetPath(startPosition, endPosition));
     }
+
+    //A Ienumerator function that excutes A* algorithm.
     public IEnumerator GetPath(Vector3 startPosition, Vector3 endPosition)
     {
         Vector3[] points = new Vector3[0];
         bool pathSucess = false;
-
+        //convert Vector3 into node positions.
         Node startNode = grid_Script.GetNodePosition(startPosition);
         Node endNode = grid_Script.GetNodePosition(endPosition);
         
         if(startNode.allowedToWalk && endNode.allowedToWalk)
         {
+            //A* algorithm uses a openset and a closedset list
             List<Node> openList = new List<Node>();
             HashSet<Node> closedList = new HashSet<Node>();
             openList.Add(startNode);
-
+            //Search when the openset has a bigger size than zero.
             while (openList.Count > 0)
             {
+                //find the node in the openset with the lowest F cost.
                 Node currentNode = openList[0];
                 for (int i = 1; i < openList.Count; i++)
                 {
@@ -42,6 +46,7 @@ public class PathFinding : MonoBehaviour
                         currentNode = openList[i];
                     }
                 }
+                //Now we have the lowest f cost in the openset, remove it from the openset and add it to the closedset.
                 openList.Remove(currentNode);
                 closedList.Add(currentNode);
 
@@ -53,13 +58,16 @@ public class PathFinding : MonoBehaviour
                 }
                 foreach (Node neighbour in grid_Script.FindNeighbours(currentNode))
                 {
+                    //If is in the closet set then skip ahead to the next neighbour.
                     if (!neighbour.allowedToWalk || closedList.Contains(neighbour))
                     {
                         continue;
                     }
+                    
                     int newMovementCostToNeighbour = currentNode.gCost + GetDistance(currentNode, neighbour);
                     if (newMovementCostToNeighbour < neighbour.gCost || !openList.Contains(neighbour))
                     {
+                        //Calculate hcost and gcost.
                         neighbour.gCost = newMovementCostToNeighbour;
                         neighbour.hCost = GetDistance(neighbour, endNode);
                         neighbour.parent = currentNode;
@@ -81,6 +89,7 @@ public class PathFinding : MonoBehaviour
         moveToTarget_Script.FinishedPath(points, pathSucess);
     }
 
+    //To get the path we need to retrace it from the start node to the end node. tracing the path backwards.
     public Vector3[] RetracePath(Node startNode, Node endNode)
     {
         List<Node> path = new List<Node>();
@@ -92,6 +101,7 @@ public class PathFinding : MonoBehaviour
         }
         Vector3[] points = SimplifyPath(path);
         Array.Reverse(points);
+        
         return points;
 
 
@@ -115,6 +125,7 @@ public class PathFinding : MonoBehaviour
         return points.ToArray();
     }
 
+    //Calculate the distance between the nodes. In A* a diagonal move costs 1.4 and horizontal costs 1, however multiply by 10 for simplicity.
     int GetDistance(Node NodeA, Node NodeB)
     {
         int distX = Mathf.Abs(NodeA.gridX - NodeB.gridX);
@@ -125,33 +136,5 @@ public class PathFinding : MonoBehaviour
         }
         return 14 * distX + 10 * (distY - distX);
     }
-
-    /*private List<Node> openList;
-    private List<Node> closedList;
-    private Grid grid_Script;
-    public void Awake()
-    {
-        grid_Script = GetComponent<Grid>();
-    }
-
-    private List<Node> GetPath(Vector3 startPosition, Vector3 endPosition)
-    {
-        Node startNode = grid_Script.GetNodePosition(startPosition);
-        Node endNode = grid_Script.GetNodePosition(endPosition);
-
-        openList = new List<Node>();
-        closedList = new List<Node>();
-        openList.Add(startNode);
-
-        for (int x = 0; x < grid_Script.GetWidth(); x++)
-        {
-           for (int y = 0; y < grid_Script.GetHeight(); y++)
-           {
-                N
-           }
-        }
-    }*/
-
-
 
 }

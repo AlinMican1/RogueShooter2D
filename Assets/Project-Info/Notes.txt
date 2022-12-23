@@ -1,6 +1,17 @@
 -Achieved performance by destroying game objects after some time
 
+-Working on player movement and shoot script 3rd oct
+ -Instantiate bullet at correct weapon muzzle coordinates
+ -Allow player to move in y and x axis directions
+ -Make a dodge function that gives the character invulnerability and not being able to spam the ability e.g adding a cooldown.
+ -Take the left mouse button as an input to be able to shoot and 'WASD' keys to move characters.
+ -Rotate character based on mouse location.
 
+-Working on finding a good path finding algorithm week 10th Oct
+ -Research Dijkstra' algorithm
+ -Research A* path finding algorithm
+ -Devise the advantages and disadvantages of each of them
+ 
 
 -Working on Pathfinding Algorithm 17th - 30th oct
 - First Create a Grid system where we can get map out the whole map, also find all the non-walkable nodes.
@@ -19,4 +30,10 @@
 
 -Working on XP System week 31 oct
     -Learn about time scale in unity, being able to stop time and all functions (pausing the game) when activating time.time = 0 freezing everything that uses time scale.
-    -Learnning about scriptable items
+    -Drop Xp when enemy is destroyed.
+
+-Working on Recoil system week 7th Nov
+    -Able to get player position and mouse crosshair position relative to the player.
+    -Based on how far the mouse crosshair position is from player position increase recoil.
+    -Use pythagoras theorem to work the distance between player and mouse crosshair position.
+    

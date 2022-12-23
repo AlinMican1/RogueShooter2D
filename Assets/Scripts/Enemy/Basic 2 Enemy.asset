@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5dde30c7b06db9b49a4c6bb2ee6f65e3, type: 3}
   m_Name: Basic 2 Enemy
   m_EditorClassIdentifier: 
-  name: 
-  Health: 100
-  DropXp: 2
-  damage: 10
+  name: Basic 2 Enemy
+  Health: 120
+  DropXp: 5
+  damage: 20
   speed: 5
   range: 2
   attackCooldown: 1
-  gem: {fileID: 0}
+  gem: {fileID: 21300000, guid: 62c950c95252877438bc71f896ddd350, type: 3}

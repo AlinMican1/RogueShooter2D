@@ -21,7 +21,7 @@ public class Grid : MonoBehaviour
         gridSizeY = (int)(gridSize.x / (nodeSize * 2));
         GenerateMapGrid();
     }
-
+    
      private void OnDrawGizmos()
      {
          Gizmos.DrawWireCube(transform.position, new Vector3(gridSize.x, gridSize.y, 3));
@@ -34,7 +34,7 @@ public class Grid : MonoBehaviour
              {
                  Gizmos.color = Color.cyan;
              }
-
+           
              Gizmos.DrawCube(n.worldPosition, Vector3.one * ((nodeSize * 2) - 0.1f));
          }
      }

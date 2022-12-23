@@ -17,21 +17,19 @@ public class WeaponSystem : MonoBehaviour
     
     [Header("Reference")]
     public Transform shootpoint;
-    public RaycastHit rayHit;
-    public GameObject BulletPrefab;
+    //public GameObject BulletPrefab;
+    public List<GameObject> BulletPrefabs = new List<GameObject>();
     RecoilSystem recoilSystem_script;
     SwitchWeapon switchWeapon_script;
+    LevelUpMenu levelUpMenu_script;
 
     [Header("Graphics")]
     public ParticleSystem muzzleFlash;
     public TextMeshProUGUI MagazineText;
     [SerializeField] ShakeCamera ShakeCamera_Script;
 
-
-
-    public float maxRecoil = 10f;
     public float currentRecoil = 0f;
-    float time_elapsed;
+    
 
 
     //Ignore Layer Weapon for RayCast, because bullets have a collider, and we want to ignore this collider, for the rayCast
@@ -44,9 +42,10 @@ public class WeaponSystem : MonoBehaviour
         ShakeCamera_Script = GameObject.FindObjectOfType<ShakeCamera>();
         switchWeapon_script = GameObject.FindObjectOfType<SwitchWeapon>();
         recoilSystem_script = GameObject.FindObjectOfType<RecoilSystem>();
+        levelUpMenu_script = GameObject.FindObjectOfType<LevelUpMenu>();
         bulletsLeft = magazineSize;
         readyToShoot = true;
-        time_elapsed = 0f;
+       
        
     }
    
@@ -66,8 +65,7 @@ public class WeaponSystem : MonoBehaviour
         }
         catch (System.NullReferenceException) { }
 
-        //print(currentRecoil);
-
+       
     }
 
     private void myInput()
@@ -101,7 +99,7 @@ public class WeaponSystem : MonoBehaviour
         //Reset recoil based on holding down button or not
         if(readyToShoot && !shooting && !reloading && bulletsLeft > 0 && allowButtonHold)
         {
-            float recoilIncrement = (float)(recoilSystem_script.distance * 0.1);
+            float recoilIncrement = (float)(recoilSystem_script.distance * 0.2);
             currentRecoil = Mathf.Clamp((float)(currentRecoil - recoilIncrement), 0.0f, recoilSystem_script.distance);
         }
         if (readyToShoot && !shooting && !reloading && bulletsLeft > 0 && !allowButtonHold)
@@ -114,8 +112,9 @@ public class WeaponSystem : MonoBehaviour
 
     private IEnumerator ResetRecoil()
     {
+        //Reset the recoil after a certain time after shoot function is not called.
         yield return new WaitForSeconds(0.8f);
-        float recoilIncrement = (float)(recoilSystem_script.distance * 0.1);
+        float recoilIncrement = (float)(recoilSystem_script.distance * 0.2);
         currentRecoil = Mathf.Clamp((float)(currentRecoil - recoilIncrement), 0.0f, recoilSystem_script.distance);
     }
     private void Reload()
@@ -175,9 +174,15 @@ public class WeaponSystem : MonoBehaviour
             Debug.Log(hit.collider.name);
             
         }
-
-       
-        Instantiate(BulletPrefab, shootpoint.position, shootpoint.rotation);
+        //Instantiate the right bullet according to the buff selected.
+        if(levelUpMenu_script.GetBuffName == "Bouncy_Bullet")
+        {
+            Instantiate(BulletPrefabs[1], shootpoint.position, shootpoint.rotation);
+        }
+        else
+        {
+            Instantiate(BulletPrefabs[0], shootpoint.position, shootpoint.rotation);
+        }
         
         
         bulletsLeft--;

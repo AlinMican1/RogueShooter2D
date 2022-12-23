@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: Thompson
   m_EditorClassIdentifier: 
   name: Thompson
-  description: 
-  artwork: {fileID: 0}
+  description: A fast fire rate weapon
+  artwork: {fileID: 21300000, guid: 35ac960be3dc06143a0882f8ee70bc2b, type: 3}

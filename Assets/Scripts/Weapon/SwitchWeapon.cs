@@ -26,7 +26,7 @@ public class SwitchWeapon : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //if the weapon name in the hierarchy is the same as the card weapon name then set the currentWeapon be the i counter.
         for (int i = 0; i < this.transform.childCount; i++)
         {
             if (this.transform.GetChild(i).name == levelUpMenu_script.GetWeaponName)
@@ -39,8 +39,10 @@ public class SwitchWeapon : MonoBehaviour
         }
     }
 
+    
     public void SwitchWeapons(int index)
     {
+        //The weapon that has the index in the hierarchy set it to true, otherwise set all other weapons to false.
         for (int i = 0; i < this.transform.childCount; i++)
         {
             if (i == index)

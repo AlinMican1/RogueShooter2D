@@ -9,14 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5dde30c7b06db9b49a4c6bb2ee6f65e3, type: 3}
-  m_Name: Boss Enemy
+  m_Script: {fileID: 11500000, guid: 61b4301ff8b29cd46af39a2acd9ad603, type: 3}
+  m_Name: Explosive Bullet
   m_EditorClassIdentifier: 
-  name: Boss Enemy
-  Health: 200
-  DropXp: 10
-  damage: 10
-  speed: 3
-  range: 3
-  attackCooldown: 1
-  gem: {fileID: 21300000, guid: b883a85e79893b54285c90b662ad2adc, type: 3}
+  name: 
+  description: 
+  artwork: {fileID: 0}

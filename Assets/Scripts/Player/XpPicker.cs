@@ -8,10 +8,12 @@ public class XpPicker : MonoBehaviour
 
     public void Start()
     {
+        //Get playerXP script.
         playerXP_script = GameObject.FindObjectOfType<PlayerXP>();
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
+        //Find the collision of type XP and check the transform name.
         if (other.transform.tag == "XP")
         {
             
@@ -31,6 +33,7 @@ public class XpPicker : MonoBehaviour
             {
                 playerXP_script.IncreaseXp(10);
             }
+            //If the item is of XP-type in the collision destroy it.
             Destroy(other.gameObject);
         }
 

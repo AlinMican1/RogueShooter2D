@@ -9,14 +9,11 @@ public class DropXp : MonoBehaviour
     public PlayerMovement playerMovement_script;
     void Start()
     {
+        //Get the enemy script
         create_Enemy_script = this.GetComponent<Create_Enemy>();
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-       
-    }
+   
 
     //Drop item the correct gem based on mob XP
     public void DropItem(int Xp)
