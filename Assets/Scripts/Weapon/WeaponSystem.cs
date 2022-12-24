@@ -179,6 +179,10 @@ public class WeaponSystem : MonoBehaviour
         {
             Instantiate(BulletPrefabs[1], shootpoint.position, shootpoint.rotation);
         }
+        if(levelUpMenu_script.GetBuffName == "Explosive_Bullet")
+        {
+            Instantiate(BulletPrefabs[2], shootpoint.position, shootpoint.rotation);
+        }
         else
         {
             Instantiate(BulletPrefabs[0], shootpoint.position, shootpoint.rotation);

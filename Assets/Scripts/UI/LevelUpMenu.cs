@@ -12,8 +12,7 @@ public class LevelUpMenu : MonoBehaviour
     public PlayerXP player_Xp_script;
     public string GetWeaponName;
     public string GetBuffName;
-    bool clicked_buff = true;
-    bool clicked_weapon = false;
+    
     
     [SerializeField] Transform Weapon_List;
     [SerializeField] Transform Buff_List;
@@ -71,8 +70,13 @@ public class LevelUpMenu : MonoBehaviour
 
     public void clicked()
     {
+        
         GetWeaponName = Weapon_List.GetChild(RandomNumber_Weapons()).name;
+       
         Weapon_List.GetChild(RandomNumber_Weapons()).gameObject.SetActive(false);
+        Buff_List.GetChild(RandomNumber_Buffs()).gameObject.SetActive(false);
+        
+
 
         //when the card has been clicked we set it to inactive and allow our randomnumber function to genereate a new random number.
         changeRandomNumber = true;
@@ -81,8 +85,13 @@ public class LevelUpMenu : MonoBehaviour
 
     public void clicked_Buff()
     {
+        
         GetBuffName = Buff_List.GetChild(RandomNumber_Buffs()).name;
+       
         Buff_List.GetChild(RandomNumber_Buffs()).gameObject.SetActive(false);
+        Weapon_List.GetChild(RandomNumber_Weapons()).gameObject.SetActive(false);
+        
+
         //when the card has been clicked we set it to inactive and allow our randomnumber function to genereate a new random number.
         changeRandomNumber2 = true;
         pause.PauseGame();

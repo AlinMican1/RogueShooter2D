@@ -5,7 +5,7 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public WeaponSystem weaponSystem_Script;
-   
+    
     // Start is called before the first frame update
     public float BulletSpeed = 2f;
     public Rigidbody2D Rb;
@@ -23,13 +23,15 @@ public class Bullet : MonoBehaviour
     {
         
          //Don't collide with XP
-         if (collision.gameObject.tag == "XP" || collision.gameObject.tag == "Player")
+         if (collision.gameObject.tag == "XP")
          {
               Physics2D.IgnoreCollision(collision.gameObject.GetComponent<Collider2D>(), GetComponent<Collider2D>());
          }
-         
+         //Ignore bullet layer
+        Physics2D.IgnoreLayerCollision(9, 9);
+        Physics2D.IgnoreLayerCollision(9, 7);
         //get the collision with Create_Enemy script
-        if(collision.gameObject.TryGetComponent<Create_Enemy>(out Create_Enemy enemyComponent))
+        if (collision.gameObject.TryGetComponent<Create_Enemy>(out Create_Enemy enemyComponent))
         {
             enemyComponent.TakeDamage(weaponSystem_Script.damage);
             Destroy(gameObject);
