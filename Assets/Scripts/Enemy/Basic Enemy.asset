@@ -16,7 +16,7 @@ MonoBehaviour:
   Health: 100
   DropXp: 1
   damage: 10
-  speed: 5
+  speed: 2
   range: 2
   attackCooldown: 1
-  gem: {fileID: 21300000, guid: 2025ebe5dcc510744813ad96d22186ab, type: 3}
+  gem: {fileID: 21300000, guid: 5ac818c8b4af30941b7caa353960010b, type: 3}
