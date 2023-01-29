@@ -34,7 +34,7 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.TryGetComponent<Create_Enemy>(out Create_Enemy enemyComponent))
         {
             enemyComponent.TakeDamage(weaponSystem_Script.damage);
-            Destroy(gameObject);
+            
         }
         
 

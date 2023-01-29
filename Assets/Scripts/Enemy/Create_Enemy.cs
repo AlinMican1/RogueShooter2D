@@ -60,15 +60,16 @@ public class Create_Enemy : MonoBehaviour
         Health -= damageAmount;
         if(Health <= 0)
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
+            
             Drop_Xp_Script.DropItem(enemy_objects.DropXp);
            
         }
     }
 
-    public Vector2 enemyPosition()
+    public Vector3 enemyPosition()
     {
-        Vector2 position = transform.position;
+        Vector3 position = transform.position;
         return position;
     }
 

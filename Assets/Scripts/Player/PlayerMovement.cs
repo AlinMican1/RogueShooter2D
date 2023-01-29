@@ -13,7 +13,10 @@ public class PlayerMovement : MonoBehaviour
     bool Invulnerable;
     float DodgeCooldown = 1f;
     float NextDodge = 0f;
-  
+    bool m_HitDetect;
+    Collider m_Collider;
+    RaycastHit m_Hit;
+
     Vector2 Move;
     private void Start()
     {
@@ -28,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         Move.x = Input.GetAxisRaw("Horizontal");
         Move.y = Input.GetAxisRaw("Vertical");
         
+        Debug.DrawRay(transform.position, transform.right, Color.green);
         //Constantly update player position
         GetPlayerPosition();
         
@@ -37,12 +41,20 @@ public class PlayerMovement : MonoBehaviour
             //NextDodge = Time.time + DodgeCooldown;
         }
     }
+    /*private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawSphere(Rb.position, 25f);
+    }*/
     void FixedUpdate()
     {
         //Move the sprite around the map based on speed and input.
         Rb.MovePosition(Rb.position + Move * MovementSpeed * Time.fixedDeltaTime);
         //Call a function from another script to rotate player.
         Rb.rotation = Player_Look_Script.GetAngle();
+
+        
+        
     }
     public Vector2 GetPlayerPosition()
     {
