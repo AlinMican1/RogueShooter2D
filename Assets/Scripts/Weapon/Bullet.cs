@@ -30,6 +30,7 @@ public class Bullet : MonoBehaviour
          //Ignore bullet layer
         Physics2D.IgnoreLayerCollision(9, 9);
         Physics2D.IgnoreLayerCollision(9, 7);
+        Physics2D.IgnoreLayerCollision(9, 11);
         //get the collision with Create_Enemy script
         if (collision.gameObject.TryGetComponent<Create_Enemy>(out Create_Enemy enemyComponent))
         {

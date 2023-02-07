@@ -2974,7 +2974,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1030242815
 Transform:
   m_ObjectHideFlags: 0
@@ -3130,6 +3130,10 @@ PrefabInstance:
     - target: {fileID: 9133194828997691150, guid: ab979e9747b52ff4ea3919dd17927749, type: 3}
       propertyPath: m_Name
       value: BossEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 9133194828997691150, guid: ab979e9747b52ff4ea3919dd17927749, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ab979e9747b52ff4ea3919dd17927749, type: 3}

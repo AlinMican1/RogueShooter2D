@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
 
         if(minute == "1" && second == "0")
         {
-            print("hi from salam");
+            return;
         }
     }
 }

@@ -11,6 +11,7 @@ public class SpawnPoint : MonoBehaviour
     private float spawnRadius = 40f;
     private Vector2 newPosition;
     
+    
     public int ActiveOfBasicEnemies = 0;
     public int ActiveOfTankEnemies = 0;
     
@@ -27,8 +28,7 @@ public class SpawnPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        
+
     }
    
     private IEnumerator spawnEnemyBasic(float interval, GameObject enemy)
@@ -38,13 +38,15 @@ public class SpawnPoint : MonoBehaviour
         GameObject basic = ObjectPoolEnemies.instance.GetPooledObjectBasic();
         
         
-        if(basic != null )
+        if(basic != null)
         {
             newPosition = Random.insideUnitCircle.normalized * spawnRadius;
             basic.transform.position = new Vector3(newPosition.x, newPosition.y, -1);
             
             basic.SetActive(true);
             ActiveOfBasicEnemies += 1;
+            
+            
         }
         if (ActiveOfBasicEnemies == 40)
         {
