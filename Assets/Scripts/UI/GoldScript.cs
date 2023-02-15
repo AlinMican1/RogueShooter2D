@@ -6,7 +6,7 @@ using TMPro;
 public class GoldScript : MonoBehaviour
 {
     public TextMeshProUGUI goldText;
-    private int goldNum;
+    public int goldNum;
     // Start is called before the first frame update
     void Start()
     {

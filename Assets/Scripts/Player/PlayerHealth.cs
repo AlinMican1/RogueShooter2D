@@ -4,18 +4,23 @@ using UnityEngine;
 
 public class PlayerHealth : MonoBehaviour
 {
+
+    bool HasBeenExecuted = false;
     [Header("Player variables")]
     public int maxHealth = 100;
     public int currentHealth;
     bool invulnerable = false;
     
+    
     [Header("Scripts")]
     public HealthBar healthbar;
+    public GoldScript goldScript;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
+        goldScript = GameObject.FindObjectOfType<GoldScript>();
     }
 
     // Update is called once per frame
@@ -34,6 +39,7 @@ public class PlayerHealth : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)){
             IncreaseHealth(15);
         }
+        
     }
     //take damage from current health 
     public void TakeDamage(int damage)
@@ -55,8 +61,11 @@ public class PlayerHealth : MonoBehaviour
     //Check if player Health is less/equal to 0, return true.
     public bool PlayerDied()
     {
-        if (currentHealth <= 0)
+        if (currentHealth <= 0 && HasBeenExecuted == false)
         {
+            HasBeenExecuted = true;
+            GoldManager.gold = goldScript.goldNum + GoldManager.gold;
+            GoldManager.UpdateGold();
             return true;
         }
         return false;

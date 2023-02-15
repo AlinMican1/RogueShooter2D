@@ -8,6 +8,7 @@ TagManager:
   - XP
   - Map-Objects
   - Bullet
+  - Gold
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Map-Objects
   - Weapon
   - Enemy
-  - 
+  - Gold
   - 
   - 
   - 
