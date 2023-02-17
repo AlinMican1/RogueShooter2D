@@ -10,17 +10,20 @@ public class PlayerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int currentHealth;
     bool invulnerable = false;
+    public bool playerDied = false;
     
     
     [Header("Scripts")]
     public HealthBar healthbar;
     public GoldScript goldScript;
+    public Timer timeScript;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
         goldScript = GameObject.FindObjectOfType<GoldScript>();
+        timeScript = GameObject.FindObjectOfType<Timer>();
     }
 
     // Update is called once per frame
@@ -38,6 +41,10 @@ public class PlayerHealth : MonoBehaviour
         }
         if(Input.GetKeyDown(KeyCode.E)){
             IncreaseHealth(15);
+        }
+        if (playerDied)
+        {
+            return;
         }
         
     }
@@ -63,9 +70,22 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0 && HasBeenExecuted == false)
         {
+            playerDied = true;
             HasBeenExecuted = true;
-            GoldManager.gold = goldScript.goldNum + GoldManager.gold;
-            GoldManager.UpdateGold();
+
+            print(timeScript.totalMinute);
+            if (timeScript.totalMinute == 1)
+            {
+                GoldManager.gold = (goldScript.goldNum * 2) + GoldManager.gold;
+                GoldManager.UpdateGold();
+            }
+            if (timeScript.totalMinute == 0)
+            {
+                GoldManager.gold = (goldScript.goldNum) + GoldManager.gold;
+                GoldManager.UpdateGold();
+            }
+
+           
             return true;
         }
         return false;

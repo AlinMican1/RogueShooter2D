@@ -34,6 +34,10 @@ public class DropXp : MonoBehaviour
         {
             GameObject gems = Instantiate(gemModel[3], create_Enemy_script.enemyPosition() + new Vector3(0, 0, -1), Quaternion.identity);
         }
+        if (Xp == 20)
+        {
+            GameObject gems = Instantiate(gemModel[4], create_Enemy_script.enemyPosition() + new Vector3(0, 0, -1), Quaternion.identity);
+        }
 
     }
 }
