@@ -37,14 +37,12 @@ public class Timer : MonoBehaviour
         timerText.text = minute + ":" + second;
         
         //check if player has died
-        if (playerHealthScript.playerDied == true)
+        if (playerHealthScript.PlayerDied())
         {
-
             stopTimer = true;
             totalMinute = int.Parse(minute);
             print("here" + totalMinute);
-            
-           
+
         }
         if (minute == "1" && second == "0")
         {

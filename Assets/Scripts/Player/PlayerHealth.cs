@@ -11,6 +11,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth;
     bool invulnerable = false;
     public bool playerDied = false;
+    int time_multiplier = 100000000;
     
     
     [Header("Scripts")]
@@ -24,6 +25,7 @@ public class PlayerHealth : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
         goldScript = GameObject.FindObjectOfType<GoldScript>();
         timeScript = GameObject.FindObjectOfType<Timer>();
+
     }
 
     // Update is called once per frame
@@ -38,15 +40,48 @@ public class PlayerHealth : MonoBehaviour
         if (PlayerDied())
         {
             Debug.Log("Dead");
+            playerDied = true;
+            StartCoroutine(executeLate());
+
+
+
         }
         if(Input.GetKeyDown(KeyCode.E)){
             IncreaseHealth(15);
         }
-        if (playerDied)
+       
+
+
+
+    }
+    //Added to get the right value of the variable.
+    IEnumerator executeLate()
+    {
+        yield return new WaitForSeconds(1);
+        Score(time_multiplier);
+    }
+
+    public void Score(int multiply)
+    {
+        if (multiply == 0 && HasBeenExecuted == false)
         {
-            return;
+            GoldManager.gold = (goldScript.goldNum) + GoldManager.gold;
+            GoldManager.UpdateGold();
+            HasBeenExecuted = true;
         }
-        
+        if (multiply == 5 && HasBeenExecuted == false)
+        {
+            GoldManager.gold = (goldScript.goldNum * 2) + GoldManager.gold;
+            GoldManager.UpdateGold();
+            HasBeenExecuted = true;
+        }
+
+        if (multiply == 10 && HasBeenExecuted == false)
+        {
+            GoldManager.gold = (goldScript.goldNum * 3) + GoldManager.gold;
+            GoldManager.UpdateGold();
+            HasBeenExecuted = true;
+        }
     }
     //take damage from current health 
     public void TakeDamage(int damage)
@@ -68,24 +103,11 @@ public class PlayerHealth : MonoBehaviour
     //Check if player Health is less/equal to 0, return true.
     public bool PlayerDied()
     {
-        if (currentHealth <= 0 && HasBeenExecuted == false)
+        if (currentHealth <= 0)
         {
-            playerDied = true;
-            HasBeenExecuted = true;
-
-            print(timeScript.totalMinute);
-            if (timeScript.totalMinute == 1)
-            {
-                GoldManager.gold = (goldScript.goldNum * 2) + GoldManager.gold;
-                GoldManager.UpdateGold();
-            }
-            if (timeScript.totalMinute == 0)
-            {
-                GoldManager.gold = (goldScript.goldNum) + GoldManager.gold;
-                GoldManager.UpdateGold();
-            }
-
-           
+            time_multiplier = timeScript.totalMinute;
+            print("as" + time_multiplier);
+            
             return true;
         }
         return false;
