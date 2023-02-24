@@ -81,6 +81,19 @@ public class ObjectPoolEnemies : MonoBehaviour
 
     }
 
+    public GameObject GetPooledObjectBoss()
+    {
+        for (int i = 0; i < bossEnemies.Count; i++)
+        {
+            if (!bossEnemies[i].activeInHierarchy)
+            {
+                return bossEnemies[i];
+
+            }
+        }
+        return null;
+
+    }
 
 
 

@@ -7,6 +7,7 @@ public class SpawnPoint : MonoBehaviour
     [Header("Scripts")]
     public GameObject basicEnemy;
     public GameObject tankEnemy;
+    public GameObject bossEnemy;
     public float SpawnInterval = 0.2f;
     private float spawnRadius = 40f;
     private Vector2 newPosition;
@@ -14,12 +15,14 @@ public class SpawnPoint : MonoBehaviour
     
     public int ActiveOfBasicEnemies = 0;
     public int ActiveOfTankEnemies = 0;
+    public int ActiveOfBossEnemies = 0;
     
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(spawnEnemyBasic(SpawnInterval, basicEnemy));
         StartCoroutine(spawnEnemyTank(SpawnInterval, tankEnemy));
+        StartCoroutine(spawnEnemyBoss(SpawnInterval, bossEnemy));
 
 
 
@@ -81,6 +84,31 @@ public class SpawnPoint : MonoBehaviour
 
 
         StartCoroutine(spawnEnemyTank(interval, enemy));
+    }
+
+    private IEnumerator spawnEnemyBoss(float interval, GameObject enemy)
+    {
+        yield return new WaitForSeconds(interval);
+
+
+        GameObject boss = ObjectPoolEnemies.instance.GetPooledObjectBoss();
+
+        if (boss != null)
+        {
+            newPosition = Random.insideUnitCircle.normalized * spawnRadius;
+            boss.transform.position = new Vector3(newPosition.x, newPosition.y, -1);
+
+            boss.SetActive(true);
+            ActiveOfBossEnemies += 1;
+        }
+        if (ActiveOfBossEnemies == 10)
+        {
+            interval = 100f;
+        }
+
+
+
+        StartCoroutine(spawnEnemyBoss(interval, enemy));
     }
 
 }

@@ -26,7 +26,6 @@ public class Create_Enemy : MonoBehaviour
         playerMovement_script = GameObject.FindObjectOfType<PlayerMovement>();
         playerHealth_script = GameObject.FindObjectOfType<PlayerHealth>();
 
-
     }
 
     // Update is called once per frame

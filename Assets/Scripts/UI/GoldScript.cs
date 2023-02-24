@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
+//using TMPro;
 public class GoldScript : MonoBehaviour
 {
-    public TextMeshProUGUI goldText;
+    public Text goldText;
     public int goldNum;
     // Start is called before the first frame update
     void Start()
