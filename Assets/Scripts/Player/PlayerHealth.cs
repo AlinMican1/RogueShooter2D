@@ -37,6 +37,7 @@ public class PlayerHealth : MonoBehaviour
             TakeDamage(20);
 
         }
+        
         if (PlayerDied())
         {
             Debug.Log("Dead");

@@ -9,6 +9,7 @@ TagManager:
   - Map-Objects
   - Bullet
   - Gold
+  - BuyItem
   layers:
   - Default
   - TransparentFX
