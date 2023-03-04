@@ -27,12 +27,20 @@ public class LineOfSight : MonoBehaviour
     //function for the angle we are facing in degrees which is converted into radiants.
     public Vector3 AngleFromDirection(float angle, bool GlobalAngle)
     {
+        if (GlobalAngle == false)
+        {
+            angle -= transform.eulerAngles.z;
+        }
+        return new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), Mathf.Cos(angle * Mathf.Deg2Rad));
+    }
+    /*public Vector3 AngleFromDirection(float angle, bool GlobalAngle)
+    {
         if(GlobalAngle == false)
         {
-            angle += transform.eulerAngles.y;
+            angle -= transform.eulerAngles.z;
         }
         return new Vector3(Mathf.Sin(angle * Mathf.Deg2Rad), 0, Mathf.Cos(angle * Mathf.Deg2Rad));
-    }
+    }*/
     
     //Draw rays bewteen the FOV angle.
     void DrawFOVRays()
@@ -42,7 +50,9 @@ public class LineOfSight : MonoBehaviour
         List<Vector3> SightPoints = new List<Vector3>();
         for(int i = 0; i <= stepCount; i++)
         {
-            float angle = transform.eulerAngles.y - Angle / 2 + AngleSize * i;
+
+            float angle = (transform.eulerAngles.z - Angle / 2)*-1 + AngleSize * i;
+            
             RayCastInfo newRayCast = RayCastSight(angle);
             SightPoints.Add(newRayCast.EndPoint);
         }
@@ -70,8 +80,8 @@ public class LineOfSight : MonoBehaviour
     RayCastInfo RayCastSight(float globalAngle)
     {
         Vector3 direction = AngleFromDirection(globalAngle, true);
-        RaycastHit hit;
-        if(Physics.Raycast(transform.position,direction,out hit, SightRadius, obstacleMask))
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, ((int)SightRadius), obstacleMask);
+        if (hit.collider != null)
         {
             return new RayCastInfo(true, hit.distance, globalAngle, hit.point);
         }
@@ -94,8 +104,7 @@ public class LineOfSight : MonoBehaviour
         }
 
     }
-
-    //Update every frame, using LateUpdate to stop jitter for the line of sight.
+    
     private void LateUpdate()
     {
         DrawFOVRays();
