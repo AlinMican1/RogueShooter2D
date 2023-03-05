@@ -3,17 +3,23 @@ using System.Collections.Generic;
 using UnityEngine.UI;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Timer : MonoBehaviour
 {
     public Text timerText;
     float currentTime;
     public int start;
+    public float totalSecond = 0;
     private float startTime;
     private PlayerHealth playerHealthScript;
     private bool stopTimer = false;
     public GoldScript goldScript;
     public int totalMinute = 0;
+
+    //Save Time
+    public const string MINUTE = "minute";
+    public const string SECOND = "second";
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +27,9 @@ public class Timer : MonoBehaviour
        // currentTime = start * 60;
         startTime = Time.time;
         playerHealthScript = GameObject.FindObjectOfType<PlayerHealth>();
+        
+
+
     }
 
     // Update is called once per frame
@@ -36,12 +45,15 @@ public class Timer : MonoBehaviour
 
         timerText.text = minute + ":" + second;
         
+        
         //check if player has died
         if (playerHealthScript.PlayerDied())
         {
             stopTimer = true;
             totalMinute = int.Parse(minute);
-            print("here" + totalMinute);
+            totalSecond = float.Parse(second);
+            print(totalSecond);
+            
 
         }
         if (minute == "1" && second == "0")
@@ -49,5 +61,11 @@ public class Timer : MonoBehaviour
             return;
         }
     }
-    
+
+    void DisplayDeathScreen()
+    {
+        SceneManager.LoadScene("DeathScreen");
+    }
+
+
 }

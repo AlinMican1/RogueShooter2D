@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -40,9 +41,12 @@ public class PlayerHealth : MonoBehaviour
         
         if (PlayerDied())
         {
-            Debug.Log("Dead");
+           
             playerDied = true;
+            
+            //DisplayDeathScreen();
             StartCoroutine(executeLate());
+            
 
 
 
@@ -50,8 +54,8 @@ public class PlayerHealth : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.E)){
             IncreaseHealth(15);
         }
-       
 
+        
 
 
     }
@@ -60,6 +64,7 @@ public class PlayerHealth : MonoBehaviour
     {
         yield return new WaitForSeconds(1);
         Score(time_multiplier);
+        
     }
 
     public void Score(int multiply)
@@ -106,6 +111,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            
             time_multiplier = timeScript.totalMinute;
             print("as" + time_multiplier);
             
@@ -137,5 +143,12 @@ public class PlayerHealth : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    void DisplayDeathScreen()
+    {
+      
+        SceneManager.LoadScene("DeathScreen");
+       
     }
 }
