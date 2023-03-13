@@ -4,22 +4,26 @@ using UnityEngine;
 
 public class RotateSprite : MonoBehaviour
 {
-
+    //Variables for scripts.
     [Header("Scripts")]
     PlayerMovement PlayerMovement_Script;
 
+    //Variable of type SpriteRenderer to get the enemy sprite.
     [Header("variables")]
     public SpriteRenderer sprite;
-    // Start is called before the first frame update
+    
+    
+    //Function: Start is called before the first frame update
     void Start()
     {
+        //Assign the variable to their assigned scripts, so we can access them.
         PlayerMovement_Script = GameObject.FindObjectOfType<PlayerMovement>();
     }
 
-    // Update is called once per frame
+    //Function: Update is called once per frame
     void Update()
     {
-
+        //Based on the player x-axis coordinate and the enemy x-axis coordinate, flip the sprite on its x-axis to face the player.
         if (PlayerMovement_Script.GetPlayerPosition().x < this.transform.position.x)
         {
             sprite.flipX = true;

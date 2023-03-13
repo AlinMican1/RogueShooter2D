@@ -7,5 +7,6 @@ public class StateNameController : MonoBehaviour
 {
     public static int minute;
     public static float second;
+    public static int gold;
     
 }

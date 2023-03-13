@@ -52,7 +52,7 @@ public class LineOfSight : MonoBehaviour
         {
 
             float angle = (transform.eulerAngles.z - Angle / 2)*-1 + AngleSize * i;
-            
+            Debug.DrawLine(transform.position, transform.position + AngleFromDirection(angle, true) * SightRadius, Color.red);
             RayCastInfo newRayCast = RayCastSight(angle);
             SightPoints.Add(newRayCast.EndPoint);
         }

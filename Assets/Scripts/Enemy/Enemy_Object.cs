@@ -2,9 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//This is a scriptable object script, where it allows the creation of any type of enemy based on it's attributes.
 [CreateAssetMenu(fileName = "New Enemy", menuName = ("Create Enemy"))]
 public class Enemy_Object : ScriptableObject
 {
+    //Assign the default enemy values, however these can be changed based on what the enemy type is.
     public new string name;
     public int Health = 100;
     public int DropXp = 2;

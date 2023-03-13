@@ -178,10 +178,15 @@ public class WeaponSystem : MonoBehaviour
         if(levelUpMenu_script.GetBuffName == "Bouncy_Bullet")
         {
             Instantiate(BulletPrefabs[1], shootpoint.position, shootpoint.rotation);
+            
         }
-        if(levelUpMenu_script.GetBuffName == "Explosive_Bullet")
+        else if(levelUpMenu_script.GetBuffName == "Explosive_Bullet")
         {
             Instantiate(BulletPrefabs[2], shootpoint.position, shootpoint.rotation);
+        }
+        else if (levelUpMenu_script.GetBuffName == "default")
+        {
+            Instantiate(BulletPrefabs[0], shootpoint.position, shootpoint.rotation);
         }
         else
         {

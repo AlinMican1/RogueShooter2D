@@ -6,8 +6,6 @@ using UnityEngine.UI;
 public class TimeSurvived : MonoBehaviour
 {
     private Text text;
-    int minute;
-    float minute2;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +18,7 @@ public class TimeSurvived : MonoBehaviour
     void Update()
     {
 
-        print(StateNameController.minute);
-        //text.text = "Time: " + Timer_Script.totalMinute + ":" + Timer_Script.totalSecond;
+        
+        text.text = "Survived: " + StateNameController.minute + ":" + StateNameController.second;
     }
 }

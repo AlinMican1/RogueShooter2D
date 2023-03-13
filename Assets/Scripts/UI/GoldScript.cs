@@ -27,6 +27,7 @@ public class GoldScript : MonoBehaviour
             goldNum += 1;
             Destroy(Gold.gameObject);
             goldText.text = "Gold:" + goldNum;
+            StateNameController.gold = goldNum;
         }
     }
 }

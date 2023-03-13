@@ -43,13 +43,10 @@ public class PlayerHealth : MonoBehaviour
         {
            
             playerDied = true;
+            //print(StateNameController.minute);
             
-            //DisplayDeathScreen();
             StartCoroutine(executeLate());
-            
-
-
-
+  
         }
         if(Input.GetKeyDown(KeyCode.E)){
             IncreaseHealth(15);
@@ -62,9 +59,10 @@ public class PlayerHealth : MonoBehaviour
     //Added to get the right value of the variable.
     IEnumerator executeLate()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Score(time_multiplier);
-        
+        DisplayDeathScreen();
+
     }
 
     public void Score(int multiply)
@@ -75,16 +73,22 @@ public class PlayerHealth : MonoBehaviour
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
-        if (multiply == 5 && HasBeenExecuted == false)
+        if (multiply >= 5 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 2) + GoldManager.gold;
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
 
-        if (multiply == 10 && HasBeenExecuted == false)
+        if (multiply >= 10 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 3) + GoldManager.gold;
+            GoldManager.UpdateGold();
+            HasBeenExecuted = true;
+        }
+        if (multiply >= 20 && HasBeenExecuted == false)
+        {
+            GoldManager.gold = (goldScript.goldNum * 4) + GoldManager.gold;
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
@@ -113,7 +117,7 @@ public class PlayerHealth : MonoBehaviour
         {
             
             time_multiplier = timeScript.totalMinute;
-            print("as" + time_multiplier);
+           
             
             return true;
         }
