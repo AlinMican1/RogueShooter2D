@@ -36,4 +36,26 @@
     -Able to get player position and mouse crosshair position relative to the player.
     -Based on how far the mouse crosshair position is from player position increase recoil.
     -Use pythagoras theorem to work the distance between player and mouse crosshair position.
-    
+   
+-Work on 2d Line of sight system week 9-23 January
+    -Able to restrict player vision based on the obstacles in front .
+    -Mask anything black that is not in the player vision.
+    -Achieve efficiency.
+    -Look into using raycast for vision cone.
+
+-Work on UI system week 30 Jan.
+    -Produce a main menu
+    -Work on camera shake when shooting
+    -Work on Death menu screen
+    -Make them Work toghether in unity.
+
+ -Working on object pooling 6feb - 20 feb
+    -Research object pooling and its benefits
+    -Understand how it works
+    -Implement object pooling with enemy system.
+
+Working on save system and store system 24 feb - 13 mar
+    -Research a way to save game data.
+    -Find a way to display a store menu.
+    -Design a store menu.
+    -Search playerPrefs for storing data.

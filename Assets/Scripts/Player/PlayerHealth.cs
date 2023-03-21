@@ -13,12 +13,15 @@ public class PlayerHealth : MonoBehaviour
     bool invulnerable = false;
     public bool playerDied = false;
     int time_multiplier = 100000000;
+    bool HealthIncreased = false;
     
     
     [Header("Scripts")]
     public HealthBar healthbar;
     public GoldScript goldScript;
     public Timer timeScript;
+    
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
         goldScript = GameObject.FindObjectOfType<GoldScript>();
         timeScript = GameObject.FindObjectOfType<Timer>();
+
 
     }
 
@@ -36,24 +40,18 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
-
         }
         
         if (PlayerDied())
         {
            
             playerDied = true;
-            //print(StateNameController.minute);
+           
             
             StartCoroutine(executeLate());
   
         }
-        if(Input.GetKeyDown(KeyCode.E)){
-            IncreaseHealth(15);
-        }
-
-        
-
+      
 
     }
     //Added to get the right value of the variable.
@@ -65,6 +63,7 @@ public class PlayerHealth : MonoBehaviour
 
     }
 
+    //Function: Call it to multiply the amount of gold by the amount of minutes survived by the player.
     public void Score(int multiply)
     {
         if (multiply == 0 && HasBeenExecuted == false)

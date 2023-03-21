@@ -34,34 +34,21 @@ public class Store : MonoBehaviour
     GameObject item;
     public Transform ShopPanel;
     Button buyBtn;
-    StoreItem a;
+    
     private void Start()
     {
-        
+        //Get the gold from the playerprefs
         GoldManager.gold = PlayerPrefs.GetInt("gold");
-        print(GoldManager.gold);
+        
         ItemTemplate = ShopPanel.GetChild(0).gameObject;
         GoldUI();
-        
+        //Generate a list of the items.
         for(int i = 0; i< StoreItemsList.Count; i++)
         {
-            a = StoreItemsList[i];
-            SaveSystem.SaveToJSON(StoreItemsList[i],StoreItemsList.Count);
-            
-            //print(SaveSystem.LoadFromJsonBoolean(StoreItemsList[i]));
-
             item = Instantiate(ItemTemplate, ShopPanel);
             item.transform.GetChild(0).GetComponent<Text>().text = StoreItemsList[i].Title.text;
             item.transform.GetChild(1).GetComponent<Image>().sprite = StoreItemsList[i].Image;
             item.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = StoreItemsList[i].Price.ToString();
-            /*if (StoreItemsList[i].IsPurchased != SaveSystem.LoadFromJsonBoolean(StoreItemsList[i]))
-            {
-                print("hello");
-                print(StoreItemsList[i]);
-                buyBtn = ShopPanel.GetChild(i).GetChild(3).GetComponent<Button>();
-                buyBtn.interactable = false;
-                buyBtn.transform.GetChild(0).GetComponent<Text>().text = "Purchased";
-            }*/
             
             buyBtn = item.transform.GetChild(3).GetComponent<Button>();
             buyBtn.interactable = !StoreItemsList[i].IsPurchased;
@@ -73,10 +60,11 @@ public class Store : MonoBehaviour
         Destroy(ItemTemplate);
     }
 
+    //check if the button is pressed.
     void BtnClicked(int itemIndex)
     {
-        
-        if (GoldManager.gold >= StoreItemsList[itemIndex].Price) //&& SaveSystem.LoadFromJsonBoolean() == false)
+        //Check the amount of gold so we can buy the item.
+        if (GoldManager.gold >= StoreItemsList[itemIndex].Price)
         {
             GoldManager.gold -= StoreItemsList[itemIndex].Price;
             GoldManager.UpdateGold();
@@ -86,20 +74,21 @@ public class Store : MonoBehaviour
             buyBtn = ShopPanel.GetChild(itemIndex).GetChild(3).GetComponent<Button>();
             buyBtn.interactable = false;
             buyBtn.transform.GetChild(0).GetComponent<Text>().text = "Purchased";
-            //SaveSystem.SaveToJSON(StoreItemsList[itemIndex]);
+            
             GoldUI();
         }
         
         
-        
+        //if there is not enough gold, start an animation.
         else
         {
-            //SaveSystem.SaveToJSON(StoreItemsList[itemIndex]);
+            
             NoGoldAnim.SetTrigger("NoGold");
             Debug.Log("Not enough gold");
         }
        
     }
+    //Display the amount of gold.
     void GoldUI()
     {
         GoldText.text = GoldManager.gold.ToString();
@@ -107,7 +96,7 @@ public class Store : MonoBehaviour
 
     
 
-    public static class SaveSystem
+    /*public static class SaveSystem
     {
         
         /*public static void SaveItem(StoreItem item)
@@ -124,7 +113,7 @@ public class Store : MonoBehaviour
             //Close file
             stream.Close();
 
-        }*/
+        }
 
         /*public static StoreItem LoatItem()
         {
@@ -146,7 +135,7 @@ public class Store : MonoBehaviour
                 Debug.Log("Not Found");
                 return null;
             }
-        }*/
+        }
 
         public static void SaveToJSON(StoreItem item, int count)
         {
@@ -189,7 +178,7 @@ public class Store : MonoBehaviour
 
 
         }
-    }
+    }*/
     
 
     

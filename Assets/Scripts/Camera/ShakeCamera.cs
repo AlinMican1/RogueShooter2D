@@ -8,7 +8,7 @@ public class ShakeCamera : MonoBehaviour
     public Camera MainCamera;
     float shakeAmount = 0;
 
-    //Function: Upon opening the game, the Maincamera variable should be assigned to the in game main camera.
+    //Function: Upon starting the game, the Maincamera variable should be assigned to the in game main camera.
     private void Awake()
     {
         //if the variable is not assigned, then assign it.

@@ -19,11 +19,13 @@ public class SpawnPoint : MonoBehaviour
     public int ActiveOfTankEnemies = 0;
     public int ActiveOfBossEnemies = 0;
     public Timer TimeScript;
-    
+   
+
     //Function: Start is called before the first frame update
     void Start()
     {
         TimeScript = GameObject.FindObjectOfType<Timer>();
+        
         //Start a coroutine that spawns enemy based on the spawn interval.
         StartCoroutine(spawnEnemyBasic(SpawnInterval, basicEnemy));
         StartCoroutine(spawnEnemyTank(SpawnInterval, tankEnemy));
@@ -48,12 +50,48 @@ public class SpawnPoint : MonoBehaviour
             
             
         }
+       
         //If the active enemies is equal to 40 set the interval to 100 seconds to slower down the spawn rate of enemies.
-        if (ActiveOfBasicEnemies == 40)
+        if (int.Parse(TimeScript.minute) <= 1)
         {
-            interval = 3f;
+            if (ActiveOfBasicEnemies > 20)
+            {
+                
+                interval = 3f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
         }
-        
+
+        if (int.Parse(TimeScript.minute) >= 1 && int.Parse(TimeScript.minute) <= 5)
+        {
+            
+            if (ActiveOfBasicEnemies > 30)
+            {
+                
+                interval = 6f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
+        }
+        if (int.Parse(TimeScript.minute) >= 5 && int.Parse(TimeScript.minute) <= 15)
+        {
+            if (ActiveOfBasicEnemies > 40)
+            {
+                interval = 6f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
+        }
+
+
+
 
 
         StartCoroutine(spawnEnemyBasic(interval, enemy));
@@ -67,7 +105,7 @@ public class SpawnPoint : MonoBehaviour
         //Assign tank enemy gameobject, to an instance of the "ObjectPoolEnemies" script.
         GameObject tank = ObjectPoolEnemies.instance.GetPooledObjectTank();
         //If there are enemies set in the hirearachy, set them to true around the player in a radius. 
-        if (tank != null)
+        if (tank != null && float.Parse(TimeScript.second) >= 30)
         {
             newPosition = Random.insideUnitCircle.normalized * spawnRadius;
             tank.transform.position = new Vector3(newPosition.x, newPosition.y, -1);
@@ -76,9 +114,43 @@ public class SpawnPoint : MonoBehaviour
             ActiveOfTankEnemies += 1;
         }
         //If the active enemies is equal to 40 set the interval to 100 seconds to slower down the spawn rate of enemies.
-        if (ActiveOfTankEnemies == 20)
+        
+        if (int.Parse(TimeScript.minute) <= 2)
         {
-            interval = 3f;
+            if (ActiveOfTankEnemies > 5)
+            {
+
+                interval = 20f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
+        }
+
+        if (int.Parse(TimeScript.minute) >= 2 && int.Parse(TimeScript.minute) <= 6)
+        {
+
+            if (ActiveOfTankEnemies > 10)
+            {
+
+                interval = 20f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
+        }
+        if (int.Parse(TimeScript.minute) >= 6 && int.Parse(TimeScript.minute) <= 12)
+        {
+            if (ActiveOfTankEnemies > 20)
+            {
+                interval = 20f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
         }
 
         StartCoroutine(spawnEnemyTank(interval, enemy));
@@ -92,7 +164,7 @@ public class SpawnPoint : MonoBehaviour
         //Assign boss enemy gameobject, to an instance of the "ObjectPoolEnemies" script.
         GameObject boss = ObjectPoolEnemies.instance.GetPooledObjectBoss();
         //If there are enemies set in the hirearachy, set them to true around the player in a radius. 
-        if (boss != null && float.Parse(TimeScript.second) >= 10)
+        if (boss != null && int.Parse(TimeScript.minute) >= 1)
         {
             newPosition = Random.insideUnitCircle.normalized * spawnRadius;
             boss.transform.position = new Vector3(newPosition.x, newPosition.y, -1);
@@ -101,10 +173,48 @@ public class SpawnPoint : MonoBehaviour
             ActiveOfBossEnemies += 1;
         }
         //If the active enemies is equal to 40 set the interval to 100 seconds to slower down the spawn rate of enemies.
-        if (ActiveOfBossEnemies == 10)
+
+        
+        if (int.Parse(TimeScript.minute) <= 2)
         {
-            interval = 5f;
+            if (ActiveOfBossEnemies > 10)
+            {
+
+                interval = 13f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
         }
+
+        if (int.Parse(TimeScript.minute) >= 2 && int.Parse(TimeScript.minute) <= 6)
+        {
+
+            if (ActiveOfBossEnemies > 20)
+            {
+
+                interval = 13f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
+        }
+        if (int.Parse(TimeScript.minute) >= 6 && int.Parse(TimeScript.minute) <= 12)
+        {
+            if (ActiveOfBossEnemies > 30)
+            {
+
+                interval = 13f;
+            }
+            else
+            {
+                interval = 0.2f;
+            }
+        }
+
+
 
         StartCoroutine(spawnEnemyBoss(interval, enemy));
     }

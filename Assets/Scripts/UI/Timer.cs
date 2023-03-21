@@ -20,19 +20,16 @@ public class Timer : MonoBehaviour
     public bool AddHealth = false;
     public string second;
     public string minute;
-    public ObjectPoolEnemies PoolEnemies_script;
-    //Save Time
-    public const string MINUTE = "minute";
-    public const string SECOND = "second";
+  
 
     // Start is called before the first frame update
     void Start()
     {
-       // currentTime = start * 60;
+       
         startTime = Time.time;
         playerHealthScript = GameObject.FindObjectOfType<PlayerHealth>();
         create_Enemy_script = GameObject.FindObjectOfType<Create_Enemy>();
-        PoolEnemies_script = GameObject.FindObjectOfType<ObjectPoolEnemies>();
+        
 
     }
 
@@ -61,34 +58,10 @@ public class Timer : MonoBehaviour
             StateNameController.minute = totalMinute;
             StateNameController.second = totalSecond;
         }
-        Buffenemy();
-        
-
-
+ 
     }
-
-    void Buffenemy()
-    {
-        if (float.Parse(second) == 10 )
-        {
-            print("hi1");
-            for (int i = 0; i <= PoolEnemies_script.basicEnemies.Count; i++)
-            {
-                print("hi2");
-                if (PoolEnemies_script.basicEnemies[i].activeInHierarchy == true)
-                {
-                    
-                    create_Enemy_script.Health += 100;
-                }
-            }
-            
-            
-        }
-    }
-    void DisplayDeathScreen()
-    {
-        SceneManager.LoadScene("DeathScreen");
-    }
-
-
 }
+ 
+
+
+

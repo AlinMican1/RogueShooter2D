@@ -21,7 +21,7 @@ public class ObjectPoolEnemies : MonoBehaviour
     [SerializeField] private GameObject bossEnemyPrefab;
     [SerializeField] private GameObject TankEnemyPrefab;
 
-    //Function: Upon opening the game, check if there is an instance of this script.
+    //Function: Upon starting the game, check if there is an instance of this script.
     private void Awake()
     {
         if(instance == null)

@@ -5,6 +5,7 @@ using UnityEditor;
 [CustomEditor (typeof (LineOfSight))]
 public class FOV : Editor
 {
+    //Creating a custom editor script to help visualise the field of view algorithm.
     private void OnSceneGUI()
     {
         LineOfSight fov = (LineOfSight)target;

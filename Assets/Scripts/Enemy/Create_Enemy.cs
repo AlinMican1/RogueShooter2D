@@ -23,7 +23,7 @@ public class Create_Enemy : MonoBehaviour
     public DropXp Drop_Xp_Script;
     public PlayerMovement playerMovement_script;
     public PlayerHealth playerHealth_script;
-    
+    public SpawnPoint SpawnPointEnemy;
 
 
 
@@ -35,6 +35,7 @@ public class Create_Enemy : MonoBehaviour
         playerMovement_script = GameObject.FindObjectOfType<PlayerMovement>();
         playerHealth_script = GameObject.FindObjectOfType<PlayerHealth>();
         Time_script = GameObject.FindObjectOfType<Timer>();
+        SpawnPointEnemy = GameObject.FindObjectOfType<SpawnPoint>();
 
     }
 
@@ -80,6 +81,8 @@ public class Create_Enemy : MonoBehaviour
         {
             Enemydead = true;
             gameObject.SetActive(false);
+            SpawnPointEnemy.ActiveOfBasicEnemies -= 1;
+
             
             Drop_Xp_Script.DropItem(enemy_objects.DropXp);
            
