@@ -5,7 +5,7 @@ This is the final year project design.
 - Each file is in its designated area for example the file script will contain C# executable code.
 
 INSTALLATION
-- The build.exe file will be done only run on PC, if you a phone build, download the executable files and build the system on the device you want, using unity.
+- The build.exe file will be done only run on PC on 1920x 1080 resolution only, if you a phone build, download the executable files and build the system on the device you want, using unity.
 - Before running the game, make sure your device meets the minimum system requirements.
 
 System
