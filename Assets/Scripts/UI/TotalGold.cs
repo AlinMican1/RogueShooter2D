@@ -16,7 +16,7 @@ public class TotalGold : MonoBehaviour
 
     void Update()
     {
-        text.text = "Total: " + GoldManager.gold;
+        text.text = "Total: " + PlayerPrefs.GetInt("gold");
 
 
     }

@@ -381,15 +381,15 @@ MonoBehaviour:
   - Title: {fileID: 450186083}
     Image: {fileID: 21300000, guid: f1ff88e8c2df10b408c0fe6e5bc18179, type: 3}
     Price: 1000
-    IsPurchased: 0
+    IsPurchased: 1
   - Title: {fileID: 407072130}
     Image: {fileID: 21300000, guid: 6272ed6147ada5a4987aed075fab5ca2, type: 3}
     Price: 6000
-    IsPurchased: 0
+    IsPurchased: 1
   - Title: {fileID: 893896361}
     Image: {fileID: 21300000, guid: 35ac960be3dc06143a0882f8ee70bc2b, type: 3}
     Price: 2500
-    IsPurchased: 0
+    IsPurchased: 1
   NoGoldAnim: {fileID: 1282090252}
   GoldText: {fileID: 1612478312}
   ShopPanel: {fileID: 1319531807}

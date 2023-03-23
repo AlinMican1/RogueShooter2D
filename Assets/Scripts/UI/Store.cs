@@ -39,7 +39,7 @@ public class Store : MonoBehaviour
     {
         //Get the gold from the playerprefs
         GoldManager.gold = PlayerPrefs.GetInt("gold");
-        
+
         ItemTemplate = ShopPanel.GetChild(0).gameObject;
         GoldUI();
         //Generate a list of the items.

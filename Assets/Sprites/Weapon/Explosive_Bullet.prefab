@@ -268,7 +268,7 @@ MonoBehaviour:
   power: 2
   radius: 2
   thurst: 2
-  explosion: {fileID: 173226, guid: df2342a101fc54b44811414aaee023ba, type: 3}
+  explosion: {fileID: 330008512315498301, guid: 12ad23c2fa53c7043bdc4269a92c95ac, type: 3}
   collider: []
   weaponSystem_Script: {fileID: 0}
   rb: {fileID: 0}

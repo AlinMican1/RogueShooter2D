@@ -13,7 +13,7 @@ public class PlayerHealth : MonoBehaviour
     bool invulnerable = false;
     public bool playerDied = false;
     int time_multiplier = 100000000;
-    bool HealthIncreased = false;
+    
     
     
     [Header("Scripts")]
@@ -29,6 +29,7 @@ public class PlayerHealth : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
         goldScript = GameObject.FindObjectOfType<GoldScript>();
         timeScript = GameObject.FindObjectOfType<Timer>();
+        GoldManager.gold = PlayerPrefs.GetInt("gold");
 
 
     }
@@ -46,12 +47,12 @@ public class PlayerHealth : MonoBehaviour
         {
            
             playerDied = true;
-           
+
             
             StartCoroutine(executeLate());
   
         }
-      
+        print(GoldManager.gold);
 
     }
     //Added to get the right value of the variable.
@@ -66,26 +67,26 @@ public class PlayerHealth : MonoBehaviour
     //Function: Call it to multiply the amount of gold by the amount of minutes survived by the player.
     public void Score(int multiply)
     {
-        if (multiply == 0 && HasBeenExecuted == false)
+        if (multiply >= 0 && multiply <=5 && HasBeenExecuted == false)
         {
-            GoldManager.gold = (goldScript.goldNum) + GoldManager.gold;
+            GoldManager.gold += (goldScript.goldNum);
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
-        if (multiply >= 5 && HasBeenExecuted == false)
+        else if (multiply >= 5 && multiply <= 10 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 2) + GoldManager.gold;
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
 
-        if (multiply >= 10 && HasBeenExecuted == false)
+        else if (multiply >= 10 && multiply <= 20 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 3) + GoldManager.gold;
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
-        if (multiply >= 20 && HasBeenExecuted == false)
+        else if (multiply >= 20 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 4) + GoldManager.gold;
             GoldManager.UpdateGold();

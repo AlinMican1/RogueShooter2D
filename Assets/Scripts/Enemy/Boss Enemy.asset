@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Boss Enemy
   m_EditorClassIdentifier: 
   name: Boss Enemy
-  Health: 1000
+  Health: 500
   DropXp: 20
   damage: 10
   speed: 3
