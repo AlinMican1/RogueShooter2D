@@ -10,7 +10,7 @@ public class PlayerXP : MonoBehaviour
     PauseController pause;
     public PauseController PauseGame;
 
-    bool levelUp = false;
+    public bool levelUp = false;
     public XPBar xpbar;
     LevelUpMenu levelUpMenu_Script;
     LevelUpMenu enableButton_script;
@@ -59,6 +59,7 @@ public class PlayerXP : MonoBehaviour
         }
         else
         {
+            levelUp = false;
             currentXP += Xp;
         }
         

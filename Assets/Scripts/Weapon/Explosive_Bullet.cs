@@ -17,33 +17,43 @@ public class Explosive_Bullet : MonoBehaviour
 
     public Collider[] collider;
 
+    public WeaponSystem weaponSystem_Script;
+    public Rigidbody2D rb;
+    Vector3 Lastvelocity;
 
     // Start is called before the first frame update
-    void Start()
+    /*void Start()
     {
         Rb = GetComponent<Rigidbody2D>();
+    }*/
+    void Start()
+    {
+        weaponSystem_Script = GameObject.FindObjectOfType<WeaponSystem>();
+        Destroy(gameObject, 5f);
     }
+
+    // Update is called once per frame
+    
 
     // Update is called once per frame
     void Update()
     {
-        if(lifeTime > 0)
+        if (!shouldExplode)
+        {
+            Destroy(gameObject, 3f);
+        }
+        /*if(lifeTime > 0)
         {
             lifeTime -= Time.deltaTime;
             if(lifeTime <= 0)
             {
                 Destroy(gameObject);
             }
-        }
+        }*/
     }
 
     private void FixedUpdate()
     {
-        if (createForce)
-        {
-            Rb.AddForce(transform.forward * thurst);
-            createForce = false;
-        }
         if (shouldExplode)
         {
             Collider[] colliders = GetOverlappers();
@@ -53,16 +63,19 @@ public class Explosive_Bullet : MonoBehaviour
                 
             }
         }
-        Destroy(gameObject);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         shouldExplode = true;
-        Instantiate(explosion, transform.position, transform.rotation);
+        GameObject explode = Instantiate(explosion, transform.position, transform.rotation);
+        Destroy(gameObject);
+        Destroy(explode, 1f);
     }
 
     Collider[] GetOverlappers(){
-        return Physics.OverlapSphere(transform.position, radius);
+        return Physics.OverlapSphere(transform.position, radius); 
     }
 }
+

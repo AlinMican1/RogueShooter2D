@@ -14,4 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Famas
   description: 3 round burst Weapon
-  artwork: {fileID: 21300000, guid: dc812cddb6b36974e82805209234a435, type: 3}
+  artwork: {fileID: 21300000, guid: e73eafbed367f9a46a1553b118bd9b76, type: 3}

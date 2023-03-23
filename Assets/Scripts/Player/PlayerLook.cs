@@ -35,10 +35,11 @@ public class PlayerLook : MonoBehaviour
         angle = Mathf.Atan2(Direction.y, Direction.x) * Mathf.Rad2Deg;
     
     }
-
     public float GetAngle()
     {
         return angle;
     }
+
+   
 
 }

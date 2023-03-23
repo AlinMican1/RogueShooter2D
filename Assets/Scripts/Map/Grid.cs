@@ -5,15 +5,18 @@ using UnityEngine;
 
 public class Grid : MonoBehaviour
 {
+    //Variables for making the grid.
     [Header("Grid Variables")]
     public LayerMask notAllowedToWalk;
     public Vector2 gridSize;
     public float nodeSize;
-    
     Node[,] grid;
     int gridSizeX, gridSizeY;
+    
+    [Header("Scripts")]
     PlayerMovement Player_Movement_Script;
 
+    //Function: Start this 
     void Awake()
     {
         Player_Movement_Script = GameObject.FindObjectOfType<PlayerMovement>();
