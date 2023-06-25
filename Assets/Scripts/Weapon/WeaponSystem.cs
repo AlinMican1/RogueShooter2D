@@ -5,7 +5,6 @@ using TMPro;
 
 public class WeaponSystem : MonoBehaviour
 {
-
     [Header("Weapons")]
     public int damage;
     public float timeBetweenShooting, reloadTime, timeBetweenShots;
@@ -13,7 +12,6 @@ public class WeaponSystem : MonoBehaviour
     int bulletsLeft, bulletsShot;
     bool shooting, readyToShoot, reloading, switchedWeapon;
     public bool allowButtonHold;
-    
     
     [Header("Reference")]
     public Transform shootpoint;
@@ -29,8 +27,6 @@ public class WeaponSystem : MonoBehaviour
     [SerializeField] ShakeCamera ShakeCamera_Script;
 
     public float currentRecoil = 0f;
-    
-
 
     //Ignore Layer Weapon for RayCast, because bullets have a collider, and we want to ignore this collider, for the rayCast
     [Space(10)]
@@ -48,10 +44,6 @@ public class WeaponSystem : MonoBehaviour
        
        
     }
-   
-
-   
-
     // Update is called once per frame
     private void Update()
     {
@@ -154,6 +146,14 @@ public class WeaponSystem : MonoBehaviour
         {
             ShakeCamera_Script.Shake(0.02f, 0.1f);
         }
+        if (switchWeapon_script.GetWeaponName() == "Famas")
+        {
+            ShakeCamera_Script.Shake(0.1f, 0.1f);
+        }
+        if (switchWeapon_script.GetWeaponName() == "Awp")
+        {
+            ShakeCamera_Script.Shake(0.2f, 0.3f);
+        }
         readyToShoot = false;
         
         
@@ -178,10 +178,15 @@ public class WeaponSystem : MonoBehaviour
         if(levelUpMenu_script.GetBuffName == "Bouncy_Bullet")
         {
             Instantiate(BulletPrefabs[1], shootpoint.position, shootpoint.rotation);
+            
         }
-        if(levelUpMenu_script.GetBuffName == "Explosive_Bullet")
+        else if(levelUpMenu_script.GetBuffName == "Explosive_Bullet")
         {
             Instantiate(BulletPrefabs[2], shootpoint.position, shootpoint.rotation);
+        }
+        else if (levelUpMenu_script.GetBuffName == "default")
+        {
+            Instantiate(BulletPrefabs[0], shootpoint.position, shootpoint.rotation);
         }
         else
         {

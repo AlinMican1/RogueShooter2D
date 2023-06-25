@@ -261,12 +261,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6cf67c689c86fe44d9e1f3cf3faf1d98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Rb: {fileID: 0}
+  Rb: {fileID: 4407518241536714964}
   createForce: 1
   shouldExplode: 0
-  lifeTime: 5
-  power: 2.5
+  lifeTime: 2
+  power: 2
   radius: 2
   thurst: 2
-  explosion: {fileID: 173226, guid: df2342a101fc54b44811414aaee023ba, type: 3}
+  explosion: {fileID: 330008512315498301, guid: 12ad23c2fa53c7043bdc4269a92c95ac, type: 3}
   collider: []
+  weaponSystem_Script: {fileID: 0}
+  rb: {fileID: 0}

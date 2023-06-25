@@ -15,7 +15,7 @@ public class DisplayTotalGold : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GoldManager.gold);
-        text.text = "" + GoldManager.gold ;
+        
+        text.text = "" + GoldManager.gold;
     }
 }

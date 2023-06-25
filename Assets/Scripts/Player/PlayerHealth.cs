@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
@@ -14,10 +15,13 @@ public class PlayerHealth : MonoBehaviour
     int time_multiplier = 100000000;
     
     
+    
     [Header("Scripts")]
     public HealthBar healthbar;
     public GoldScript goldScript;
     public Timer timeScript;
+    
+   
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +29,8 @@ public class PlayerHealth : MonoBehaviour
         healthbar.SetMaxHealth(maxHealth);
         goldScript = GameObject.FindObjectOfType<GoldScript>();
         timeScript = GameObject.FindObjectOfType<Timer>();
+        GoldManager.gold = PlayerPrefs.GetInt("gold");
+
 
     }
 
@@ -35,51 +41,54 @@ public class PlayerHealth : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             TakeDamage(20);
-
         }
         
         if (PlayerDied())
         {
-            Debug.Log("Dead");
+           
             playerDied = true;
+
+            
             StartCoroutine(executeLate());
-
-
-
+  
         }
-        if(Input.GetKeyDown(KeyCode.E)){
-            IncreaseHealth(15);
-        }
-       
-
-
+        print(GoldManager.gold);
 
     }
     //Added to get the right value of the variable.
     IEnumerator executeLate()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         Score(time_multiplier);
+        DisplayDeathScreen();
+
     }
 
+    //Function: Call it to multiply the amount of gold by the amount of minutes survived by the player.
     public void Score(int multiply)
     {
-        if (multiply == 0 && HasBeenExecuted == false)
+        if (multiply >= 0 && multiply <=5 && HasBeenExecuted == false)
         {
-            GoldManager.gold = (goldScript.goldNum) + GoldManager.gold;
+            GoldManager.gold += (goldScript.goldNum);
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
-        if (multiply == 5 && HasBeenExecuted == false)
+        else if (multiply >= 5 && multiply <= 10 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 2) + GoldManager.gold;
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
 
-        if (multiply == 10 && HasBeenExecuted == false)
+        else if (multiply >= 10 && multiply <= 20 && HasBeenExecuted == false)
         {
             GoldManager.gold = (goldScript.goldNum * 3) + GoldManager.gold;
+            GoldManager.UpdateGold();
+            HasBeenExecuted = true;
+        }
+        else if (multiply >= 20 && HasBeenExecuted == false)
+        {
+            GoldManager.gold = (goldScript.goldNum * 4) + GoldManager.gold;
             GoldManager.UpdateGold();
             HasBeenExecuted = true;
         }
@@ -106,8 +115,9 @@ public class PlayerHealth : MonoBehaviour
     {
         if (currentHealth <= 0)
         {
+            
             time_multiplier = timeScript.totalMinute;
-            print("as" + time_multiplier);
+           
             
             return true;
         }
@@ -137,5 +147,12 @@ public class PlayerHealth : MonoBehaviour
     public int GetHealth()
     {
         return currentHealth;
+    }
+
+    void DisplayDeathScreen()
+    {
+      
+        SceneManager.LoadScene("DeathScreen");
+       
     }
 }
