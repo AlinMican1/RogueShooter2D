@@ -19,4 +19,4 @@ MonoBehaviour:
   speed: 3
   range: 3
   attackCooldown: 1
-  gem: {fileID: 0}
+  gem: {fileID: 21300000, guid: b883a85e79893b54285c90b662ad2adc, type: 3}

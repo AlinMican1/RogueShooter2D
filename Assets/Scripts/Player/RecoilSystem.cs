@@ -5,27 +5,18 @@ using UnityEngine;
 public class RecoilSystem : MonoBehaviour
 {
 
-    Vector3 worldPosition;
+    Vector3 playerPosition;
     public float distance = 0;
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
+
     void Update()
     {
-
+        //Get the mouse position from where the player is located.
         Vector3 Mousepos = Input.mousePosition;
         Mousepos.z = Camera.main.nearClipPlane;
-        worldPosition = Camera.main.ScreenToWorldPoint(Mousepos);
-       
-        distance = Vector3.Distance(worldPosition, transform.position);
+        playerPosition = Camera.main.ScreenToWorldPoint(Mousepos);
+        distance = Vector3.Distance(playerPosition, transform.position);
 
-        
-    }
-    public float GetDistance()
-    {
-        return distance;
+
     }
 }
