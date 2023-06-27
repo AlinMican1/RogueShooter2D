@@ -1,12 +1,13 @@
+# Rogue Shooter 2D
 The game was made on unity update 2021.3.3f1
 Each file is in its designated area for example the file script will contain C# executable code.
 
-INSTALLATION
+# INSTALLATION
 
 To run the game open the build folder and run the .exe file,this will only run on PC at 1920x 1080 resolution only, if you a phone build, download the executable files and build the system on the device you want, using unity.
 Before running the game, make sure your device meets the minimum system requirements.
 
-System
+# System
 Minimum Requirements
 Desktop
 Operating System
@@ -21,8 +22,8 @@ IOS - IOS 9.0 or higher
 Android -OS 4.1 or later
 -ARMv7 CPU with NEON Support or Atom CPU
 -OPENGL ES 2.0 or later
-OBJECTIVE
 
+# OBJECTIVE
 
 The objective of the game is to endlessly survive a horde of approaching zombies, leveling up and gaining the opportunity to use new weapons and different mechanics. The longer the player survives they are rewarded with a multiplier bonus at the end based on how much “gold” (the currency of the game) they have collected. This allows them to further buy in the store different items.
 
@@ -30,7 +31,7 @@ The objective of the game is to endlessly survive a horde of approaching zombies
 There are several power ups, such as different weapons with different attributes, different types of bullets such as bouncy bullets to further assist the player in the game as rounds become harder to fend off.
 
 
-CONTROLS
+# CONTROLS
 "WASD" - Movement
 "Mouse1" - to shoot
 "R" - to reload
